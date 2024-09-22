@@ -50,6 +50,12 @@
       
       a.btn-blue {background-color: #2471a3;}
       a.btn-blue:hover {background-color: #174e74;}
+
+      /* Image size adjustment */
+      img.publication-image {
+          width: 250px; /* Increase the width for a larger image */
+          height: auto; /* Maintain aspect ratio */
+      }
   </style>
   <title>Jingchen Sun - Homepage</title>
 </head>
@@ -126,9 +132,9 @@
       <li>
           <table style="width:100%; margin-bottom: 20px;">
               <tr>
-                  <!-- Image on the left -->
+                  <!-- Image on the left with larger size -->
                   <td style="width:30%; vertical-align: top;">
-                      <img src="publication/prompt-adapter.png" alt="Prompt Tuning Image" style="width: 200px;">
+                      <img src="publication/prompt-adapter.png" alt="Prompt Tuning Image" class="publication-image">
                   </td>
                   
                   <!-- Text on the right -->
@@ -150,9 +156,9 @@
       <li>
           <table style="width:100%; margin-bottom: 20px;">
               <tr>
-                  <!-- Image on the left -->
+                  <!-- Image on the left with larger size -->
                   <td style="width:30%; vertical-align: top;">
-                      <img src="publication/pidnet.png" alt="PIDNet Image" style="width: 200px;">
+                      <img src="publication/pidnet.png" alt="PIDNet Image" class="publication-image">
                   </td>
                   
                   <!-- Text on the right -->
