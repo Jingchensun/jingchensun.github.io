@@ -3,33 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <title>Hypothesis Tests (Statistic Notes)</title>
+  <link rel="stylesheet" href="../../stylesheet.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <link rel="stylesheet" href="../../stylesheet.css">
+  <style>
+    h1 {
+      text-align: center;
+      color: #527bbd;
+      font-size: 165%;
+      margin-bottom: 40px;
+      border-bottom: none;
+    }
+
+    h2 {
+      color: #2471A3;
+      font-size: 125%;
+      margin-top: 2em;
+    }
+
+    p, ul, li {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #f2f2f2;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 40px 0;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Hypothesis Testing Summary</h1>
+
+  <h1>Chapter 8: Classical Inference and Hypothesis Testing </h1>
 
   <h2>Section 8.1: Hypothesis Tests – 1 Population</h2>
   <p>Example: SAT scores are normally distributed with unknown mean \( \mu \), known standard deviation \( \sigma \).</p>
   <p>Population: \( X_p \sim \mathcal{N}(515, 116^2) \)</p>
   <p>From a random sample: \( \bar{X} = 555 \), \( n = 25 \)</p>
-  <p>Hypotheses:</p>
+
+  <p><strong>Hypotheses:</strong></p>
   <ul>
     <li>\( H_0: \mu = 515 \)</li>
     <li>\( H_A: \mu > 515 \)</li>
   </ul>
-  <p>Z-statistic:</p>
+
+  <p><strong>Z-statistic:</strong></p>
   <p>\( Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} = \frac{555 - 515}{116 / \sqrt{25}} = 1.724 \)</p>
-  <p>P-value: \( P(Z \ge 1.724) \approx 0.042 \)</p>
-  <p>Interpretation: Under \( H_0 \), there is a 4.2% chance to observe such a high sample mean. Hence, likely Sodor students have higher SAT scores.</p>
+  <p><strong>P-value:</strong> \( P(Z \ge 1.724) \approx 0.042 \)</p>
+  <p><strong>Interpretation:</strong> Under \( H_0 \), there is a 4.2% chance to observe such a high sample mean. Hence, likely Sodor students have higher SAT scores.</p>
 
   <hr>
 
   <h2>Summary of 1 Population Results</h2>
-  <table border="1" cellpadding="8">
+  <table>
     <thead>
-      <tr><th>Sample</th><th>Test Statistic</th><th>Distribution</th></tr>
+      <tr>
+        <th>Sample</th>
+        <th>Test Statistic</th>
+        <th>Distribution</th>
+      </tr>
     </thead>
     <tbody>
       <tr>
@@ -63,9 +114,11 @@
   </p>
   <p>Example: \( X \sim \text{Exp}(\lambda) \Rightarrow \mu_p = \frac{1}{\lambda} \), \( \sigma_p^2 = \frac{1}{\lambda^2} \)</p>
   <p>Test \( H_0: \mu = \mu_p \) vs \( H_A: \mu \ne \mu_p \)</p>
+
   <p>Observed t-statistic:
     \[ t = \frac{\bar{X} - \mu_p}{S / \sqrt{n}} \]
   </p>
+
   <p>Perform bootstrap resampling \( N \) times:</p>
   <ul>
     <li>Resample data with replacement → \( \bar{X}_i^*, S_i^* \)</li>
@@ -73,8 +126,10 @@
       \[ T_i^* = \frac{\bar{X}_i^* - \mu_p}{S_i^* / \sqrt{n}} \]
     </li>
   </ul>
-  <p>Compute empirical p-value from distribution of \( T^* \):
+
+  <p><strong>Empirical p-value:</strong>
     \[ \text{p-value} = 2 \times \min\left( P(T^* \ge t), P(T^* \le t) \right) \]
   </p>
+
 </body>
 </html>
