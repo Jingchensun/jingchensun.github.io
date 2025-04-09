@@ -383,3 +383,20 @@ table.imgtable, table.imgtable td {
     border: none;
     text-align: left;
 }
+
+/* Custom navigation button */
+.nav-button {
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #a9d6f5;  /* 浅蓝 */
+	color: white;
+	padding: 6px 12px;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background-color 0.3s ease;
+  }
+  
+.nav-button:hover {
+	background-color: #5faee3;  /* 鼠标悬停加深 */
+  }
+  
