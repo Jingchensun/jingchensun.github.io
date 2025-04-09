@@ -152,9 +152,9 @@ h1, h2, h3 {
 }
 
 h1 {
-	color: #527bbd;
-	font-size: 165%;
-	padding-bottom: 0.3em;
+	border-bottom: none;
+	margin-bottom: 40px;
+	text-align: center;
 }
 
 h2 {
