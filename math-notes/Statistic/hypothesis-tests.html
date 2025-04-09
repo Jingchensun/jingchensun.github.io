@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hypothesis Tests (Statistic Notes)</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="../../stylesheet.css">
+</head>
+<body>
+  <h1>Hypothesis Testing Summary</h1>
+
+  <h2>Section 8.1: Hypothesis Tests – 1 Population</h2>
+  <p>Example: SAT scores are normally distributed with unknown mean \( \mu \), known standard deviation \( \sigma \).</p>
+  <p>Population: \( X_p \sim \mathcal{N}(515, 116^2) \)</p>
+  <p>From a random sample: \( \bar{X} = 555 \), \( n = 25 \)</p>
+  <p>Hypotheses:</p>
+  <ul>
+    <li>\( H_0: \mu = 515 \)</li>
+    <li>\( H_A: \mu > 515 \)</li>
+  </ul>
+  <p>Z-statistic:</p>
+  <p>\( Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} = \frac{555 - 515}{116 / \sqrt{25}} = 1.724 \)</p>
+  <p>P-value: \( P(Z \ge 1.724) \approx 0.042 \)</p>
+  <p>Interpretation: Under \( H_0 \), there is a 4.2% chance to observe such a high sample mean. Hence, likely Sodor students have higher SAT scores.</p>
+
+  <hr>
+
+  <h2>Summary of 1 Population Results</h2>
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr><th>Sample</th><th>Test Statistic</th><th>Distribution</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>\( X_n \sim \mathcal{N}(\mu, \sigma^2) \), \( \sigma \) known</td>
+        <td>\( Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \)</td>
+        <td>\( Z \sim \mathcal{N}(0,1) \)</td>
+      </tr>
+      <tr>
+        <td>\( X_n \sim \mathcal{N}(\mu, \sigma^2) \), \( \sigma \) unknown</td>
+        <td>\( T = \frac{\bar{X} - \mu}{S / \sqrt{n}} \)</td>
+        <td>\( T \sim t(n - 1) \)</td>
+      </tr>
+      <tr>
+        <td>\( Y \sim \text{Binomial}(n, p) \), exact binomial</td>
+        <td>—</td>
+        <td>Exact binomial</td>
+      </tr>
+      <tr>
+        <td>\( Y \sim \text{Bin}(n, p) \), large \( n \)</td>
+        <td>\( Z = \frac{Y \pm 0.5 - np}{\sqrt{np(1 - p)}} \)</td>
+        <td>\( Z \sim \mathcal{N}(0, 1) \) with continuity correction</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Section 8.2: Bootstrap t-test for Mean</h2>
+  <p>Given \( X_i \sim F(\mu, \sigma^2) \) (distribution unknown), define:
+    \[ T = \frac{\bar{X} - \mu}{S / \sqrt{n}} \]
+  </p>
+  <p>Example: \( X \sim \text{Exp}(\lambda) \Rightarrow \mu_p = \frac{1}{\lambda} \), \( \sigma_p^2 = \frac{1}{\lambda^2} \)</p>
+  <p>Test \( H_0: \mu = \mu_p \) vs \( H_A: \mu \ne \mu_p \)</p>
+  <p>Observed t-statistic:
+    \[ t = \frac{\bar{X} - \mu_p}{S / \sqrt{n}} \]
+  </p>
+  <p>Perform bootstrap resampling \( N \) times:</p>
+  <ul>
+    <li>Resample data with replacement → \( \bar{X}_i^*, S_i^* \)</li>
+    <li>Compute:
+      \[ T_i^* = \frac{\bar{X}_i^* - \mu_p}{S_i^* / \sqrt{n}} \]
+    </li>
+  </ul>
+  <p>Compute empirical p-value from distribution of \( T^* \):
+    \[ \text{p-value} = 2 \times \min\left( P(T^* \ge t), P(T^* \le t) \right) \]
+  </p>
+</body>
+</html>
