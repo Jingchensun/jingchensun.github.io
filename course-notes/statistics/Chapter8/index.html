@@ -132,6 +132,83 @@
       \[ \text{p-value} = 2 \times \min\left( P(T^* \ge t), P(T^* \le t) \right) \]
     </p>
 
+    <p><strong>R implementations of the bootstrap t-test:</strong></p>
+    <ul>
+      <li><a href="ch8_t-bootstrap_exp.html" target="_blank">ch8_t-bootstrap_exp.html</a>: Example using exponential distribution</li>
+      <li><a href="ch8_t-bootstrap_skew.html" target="_blank">ch8_t-bootstrap_skew.html</a>: Example using skewed distribution</li>
+    </ul>
+    
+    <hr>
+
+    <h2>Section 8.3: Hypothesis Tests – 2 Population Means</h2>
+    <p>Given two independent samples:</p>
+    <ul>
+      <li>\( X_1 \sim \mathcal{N}(\mu_1, \sigma_1^2) \)</li>
+      <li>\( X_2 \sim \mathcal{N}(\mu_2, \sigma_2^2) \)</li>
+    </ul>
+    <p>We test:</p>
+    <ul>
+      <li>Null hypothesis: \( H_0: \mu_1 = \mu_2 \)</li>
+      <li>Alternative hypothesis: \( H_A: \mu_1 > \mu_2 \)</li>
+    </ul>
+    <p>The test statistic is:</p>
+    <p>
+      \[
+      T = \frac{(\bar{X}_1 - \bar{X}_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}
+      \sim t(\nu)
+      \]
+      where \( \nu \) is the Welch-Satterthwaite approximated degrees of freedom.
+    </p>
+    <p>The observed t-value is:</p>
+    <p>
+      \[
+      t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+      \]
+    </p>
+    <p>P-value:</p>
+    <p>
+      \[
+      \text{p-value} = 1 - P(T \le t)
+      \]
+    </p>
+    <p>If the two samples are matched pairs \( X_A, X_B \), we define \( X = X_A - X_B \), and test if the mean of \( X \) is 0 using a one-sample t-test.</p>
+
+    <hr>
+
+    <h2>Section 8.4: Hypothesis Tests – 2 Population Proportions</h2>
+    <p>Let:</p>
+    <ul>
+      <li>\( \hat{p}_1 = \frac{x_1}{n_1} \), \( \hat{p}_2 = \frac{x_2}{n_2} \)</li>
+      <li>Null hypothesis: \( H_0: p_1 = p_2 \)</li>
+      <li>Alternative hypothesis: \( H_A: p_1 > p_2 \)</li>
+    </ul>
+    <p>Under \( H_0 \), the pooled proportion is:</p>
+    <p>
+      \[
+      \hat{p} = \frac{x_1 + x_2}{n_1 + n_2}
+      \]
+    </p>
+    <p>Standard error:</p>
+    <p>
+      \[
+      \text{SE} = \sqrt{\hat{p}(1 - \hat{p}) \left( \frac{1}{n_1} + \frac{1}{n_2} \right)}
+      \]
+    </p>
+    <p>Then the z-statistic is:</p>
+    <p>
+      \[
+      z = \frac{\hat{p}_1 - \hat{p}_2}{\text{SE}}
+      \]
+    </p>
+    <p>In the given example:</p>
+    <ul>
+      <li>\( n_1 = 143, \hat{p}_1 = 0.755 \)</li>
+      <li>\( n_2 = 119, \hat{p}_2 = 0.429 \)</li>
+      <li>\( \hat{p} \approx 0.6068 \), \( \text{SE} \approx 0.0606 \)</li>
+      <li>\( z = 5.3795 \), \( p \approx 4 \times 10^{-8} \)</li>
+    </ul>
+    <p>This very small p-value gives strong evidence against \( H_0 \).</p>
+
   </div>
 </body>
 </html>
