@@ -137,77 +137,96 @@
       <li><a href="ch8_t-bootstrap_exp.html" target="_blank">ch8_t-bootstrap_exp.html</a>: Example using exponential distribution</li>
       <li><a href="ch8_t-bootstrap_skew.html" target="_blank">ch8_t-bootstrap_skew.html</a>: Example using skewed distribution</li>
     </ul>
-    
+
     <hr>
 
     <h2>Section 8.3: Hypothesis Tests – 2 Population Means</h2>
-    <p>Given two independent samples:</p>
+    <p>Example: comparing two means with independent samples:</p>
     <ul>
       <li>\( X_1 \sim \mathcal{N}(\mu_1, \sigma_1^2) \)</li>
       <li>\( X_2 \sim \mathcal{N}(\mu_2, \sigma_2^2) \)</li>
     </ul>
-    <p>We test:</p>
+    <p>We want to test if \( \mu_1 > \mu_2 \). Let sample statistics be:</p>
     <ul>
-      <li>Null hypothesis: \( H_0: \mu_1 = \mu_2 \)</li>
-      <li>Alternative hypothesis: \( H_A: \mu_1 > \mu_2 \)</li>
+      <li>Sample sizes: \( n_1, n_2 \)</li>
+      <li>Sample means: \( \bar{X}_1, \bar{X}_2 \)</li>
+      <li>Sample standard deviations: \( S_1, S_2 \)</li>
     </ul>
-    <p>The test statistic is:</p>
+    <p><strong>Hypotheses:</strong></p>
+    <ul>
+      <li>\( H_0: \mu_1 - \mu_2 = 0 \)</li>
+      <li>\( H_A: \mu_1 > \mu_2 \)</li>
+    </ul>
+    <p><strong>Test statistic:</strong></p>
     <p>
       \[
-      T = \frac{(\bar{X}_1 - \bar{X}_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}
-      \sim t(\nu)
+      T = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}
+      \sim t_{\nu}
       \]
-      where \( \nu \) is the Welch-Satterthwaite approximated degrees of freedom.
+      with degrees of freedom \( \nu \) approximated using Welch's method.
     </p>
-    <p>The observed t-value is:</p>
+    <p><strong>Observed t-value:</strong></p>
     <p>
       \[
       t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
       \]
     </p>
-    <p>P-value:</p>
+    <p><strong>P-value:</strong></p>
     <p>
       \[
-      \text{p-value} = 1 - P(T \le t)
+      \text{p-value} = P(T \ge t) = 1 - \text{pt}(t, \text{df} = \nu)
       \]
     </p>
-    <p>If the two samples are matched pairs \( X_A, X_B \), we define \( X = X_A - X_B \), and test if the mean of \( X \) is 0 using a one-sample t-test.</p>
+    <p><strong>Matched Pairs:</strong> If samples are paired:</p>
+    <ul>
+      <li>\( X_A \sim \mathcal{N}(\mu_A, \sigma_A^2) \), \( X_B \sim \mathcal{N}(\mu_B, \sigma_B^2) \)</li>
+      <li>Define \( X = X_A - X_B \), then treat \( X_1, X_2, \dots \) as one sample</li>
+      <li>\( X \sim \mathcal{N}(\mu_A - \mu_B, \sigma_A^2 + \sigma_B^2) \)</li>
+      <li>Solve as in Section 8.1 (one-population test)</li>
+    </ul>
 
     <hr>
 
     <h2>Section 8.4: Hypothesis Tests – 2 Population Proportions</h2>
-    <p>Let:</p>
+    <p>Example: treatment vs control proportions</p>
     <ul>
-      <li>\( \hat{p}_1 = \frac{x_1}{n_1} \), \( \hat{p}_2 = \frac{x_2}{n_2} \)</li>
-      <li>Null hypothesis: \( H_0: p_1 = p_2 \)</li>
-      <li>Alternative hypothesis: \( H_A: p_1 > p_2 \)</li>
+      <li>Treatment: \( n_1 = 143, \hat{p}_1 = 75.5\% \)</li>
+      <li>Control: \( n_2 = 119, \hat{p}_2 = 42.9\% \)</li>
     </ul>
-    <p>Under \( H_0 \), the pooled proportion is:</p>
-    <p>
-      \[
-      \hat{p} = \frac{x_1 + x_2}{n_1 + n_2}
-      \]
-    </p>
-    <p>Standard error:</p>
-    <p>
-      \[
-      \text{SE} = \sqrt{\hat{p}(1 - \hat{p}) \left( \frac{1}{n_1} + \frac{1}{n_2} \right)}
-      \]
-    </p>
-    <p>Then the z-statistic is:</p>
-    <p>
-      \[
-      z = \frac{\hat{p}_1 - \hat{p}_2}{\text{SE}}
-      \]
-    </p>
-    <p>In the given example:</p>
+    <p><strong>Hypotheses:</strong></p>
     <ul>
-      <li>\( n_1 = 143, \hat{p}_1 = 0.755 \)</li>
-      <li>\( n_2 = 119, \hat{p}_2 = 0.429 \)</li>
-      <li>\( \hat{p} \approx 0.6068 \), \( \text{SE} \approx 0.0606 \)</li>
-      <li>\( z = 5.3795 \), \( p \approx 4 \times 10^{-8} \)</li>
+      <li>\( H_0: p_1 = p_2 \)</li>
+      <li>\( H_A: p_1 > p_2 \)</li>
     </ul>
-    <p>This very small p-value gives strong evidence against \( H_0 \).</p>
+    <p><strong>From binomial model:</strong></p>
+    <ul>
+      <li>\( X_1 \sim \text{Binom}(n_1, p_1) \), \( X_2 \sim \text{Binom}(n_2, p_2) \)</li>
+      <li>\( E[\hat{p}_1 - \hat{p}_2] = p_1 - p_2 \)</li>
+      <li>\( \text{Var}[\hat{p}_1 - \hat{p}_2] = \frac{p_1(1 - p_1)}{n_1} + \frac{p_2(1 - p_2)}{n_2} \)</li>
+    </ul>
+    <p><strong>Standardized statistic:</strong></p>
+    <p>
+      \[
+      Y = \frac{(\hat{p}_1 - \hat{p}_2) - (p_1 - p_2)}{\sqrt{\frac{p_1(1 - p_1)}{n_1} + \frac{p_2(1 - p_2)}{n_2}}}
+      \quad (\text{discrete})
+      \]
+    </p>
+    <p><strong>Under \( H_0 \):</strong></p>
+    <p>
+      \[
+      \hat{p} = \frac{\hat{p}_1 n_1 + \hat{p}_2 n_2}{n_1 + n_2}
+      \quad \Rightarrow \quad
+      Y = \frac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1 - \hat{p}) \left( \frac{1}{n_1} + \frac{1}{n_2} \right)}}
+      \]
+    </p>
+    <p><strong>In this example:</strong></p>
+    <ul>
+      <li>\( \hat{p} \approx 0.6068 \)</li>
+      <li>\( \text{SE} \approx 0.0606 \)</li>
+      <li>\( z = 5.3795 \)</li>
+      <li>\( p = P(Z \ge z) \approx 4 \times 10^{-8} \)</li>
+    </ul>
+    <p>This very small p-value gives strong evidence that the treatment improves the proportion.</p>
 
   </div>
 </body>
