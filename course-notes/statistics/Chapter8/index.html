@@ -228,11 +228,10 @@
     </ul>
     <p>This very small p-value gives strong evidence that the treatment improves the proportion.</p>
      <!-- Existing content goes here -->
-
      <h2>Section 8.5: Type I and Type II Errors</h2>
      <p><strong>Type I Error:</strong> Rejecting \( H_0 \) when it is true. Also called a "false positive."</p>
      <p><strong>Type II Error:</strong> Not rejecting \( H_0 \) when \( H_A \) is true. Also called a "false negative."</p>
- 
+     
      <table>
        <thead>
          <tr>
@@ -254,7 +253,7 @@
          </tr>
        </tbody>
      </table>
- 
+     
      <p><strong>Analogy (Criminal Justice):</strong></p>
      <ul>
        <li>\( H_0 \): innocent</li>
@@ -281,49 +280,78 @@
          </tr>
        </tbody>
      </table>
- 
-     <p>Goal is to minimize Type I Error. Lowering Type I Error rate increases Type II Error rate, and vice versa.</p>
-     <p>A 5% significance level means a 5% chance of committing a Type I Error.</p>
- 
+     
+     <p><strong>Goal:</strong> Minimize Type I Error.</p>
+     <p><strong>Note:</strong> Decreasing Type I Error rate tends to increase Type II Error rate.</p>
+     <p>A 5% significance level means there is a 5% chance of committing a Type I Error.</p>
+     
      <hr>
- 
+     
      <h2>Section 8.6: Example of Type I Error in Binomial Test</h2>
-     <p><strong>Example:</strong> Company claims 3% allergic reaction. You sample 100 people, and sue if 5 or more are allergic.</p>
-     <p>\( H_0: p = 0.03 \), \( H_A: p > 0.03 \)</p>
-     <p>Model: \( Y \sim 	ext{Binomial}(100, p) \)</p>
-     <p>Reject \( H_0 \) if \( Y \ge 5 \)</p>
-     <p>Calculate Type I Error:</p>
-     <p>\( P(Y \ge 5 \mid p = 0.03) = 1 - P(Y \le 4) = 1 - 	ext{pbinom}(4, 100, 0.03) \approx 0.182 \)</p>
-     <p><strong>Interpretation:</strong> 18.2% chance of wrongly suing when company is honest.</p>
- 
+     <p><strong>Example:</strong> A lotion company claims 3% allergic reaction. You collect a random sample with \( n = 100 \) and plan to file a lawsuit if \( Y \ge 5 \) allergic cases are found.</p>
+     <p><strong>Hypotheses:</strong></p>
+     <ul>
+       <li>\( H_0: p = 0.03 \)</li>
+       <li>\( H_A: p > 0.03 \)</li>
+     </ul>
+     <p><strong>Model:</strong> \( Y = X_1 + \cdots + X_n \sim \text{Binomial}(n, p) \)</p>
+     <p><strong>Test decision:</strong> Reject \( H_0 \) if \( Y \ge 5 \)</p>
+     <p><strong>Compute Type I Error:</strong></p>
+     <p>
+     \[
+     P(\text{Type I Error}) = P(Y \ge 5 \mid p = 0.03) = 1 - P(Y \le 4) = 1 - \text{pbinom}(4, 100, 0.03) \approx 0.182
+     \]
+     </p>
+     <p><strong>Interpretation:</strong> 18.2% chance of wrongly rejecting the company's claim if it is true.</p>
+     <p>The acceptable level of Type I Error depends on the consequences of the error (e.g., human life, cost, time).</p>
+     <p><strong>Note:</strong> While 5% is commonly used as the significance level, there is no mathematical reason for this specific value.</p>
+     
      <hr>
- 
+     
      <h2>Section 8.7: Type I Error Threshold for Normal Data</h2>
-     <p><strong>Example:</strong> SAT scores \( \sim N(515, 116^2) \), sample size \( n = 100 \)</p>
-     <p>Want Type I Error = 10%, testing \( H_0: \mu = 515 \) vs \( H_A: \mu < 515 \)</p>
-     <p>Find C such that \( P(\bar{X} < C \mid \mu = 515) = 0.10 \)</p>
-     <p>\( Z = \frac{\bar{X} - 515}{116 / \sqrt{100}} \Rightarrow z = -1.282 \Rightarrow C = 515 - 1.282 \cdot \frac{116}{\sqrt{100}} = 500 \)</p>
-     <p><strong>Reject \( H_0 \) if:</strong> \( \bar{X} < 500 \)</p>
- 
+     <p><strong>Example:</strong> SAT scores follow \( X_p \sim \mathcal{N}(515, 116^2) \), sample size \( n = 100 \).</p>
+     <p><strong>Goal:</strong> Determine threshold \( C \) such that \( P(\bar{X} < C \mid \mu = 515) = 0.10 \)</p>
+     <p><strong>Hypotheses:</strong> \( H_0: \mu = 515 \), \( H_A: \mu < 515 \)</p>
+     <p>Using standardization:</p>
+     <p>
+     \[
+     P\left(\bar{X} < C \mid \mu = 515\right) = P\left(Z < \frac{C - 515}{116/\sqrt{100}}\right) = 0.10 \Rightarrow z = -1.282
+     \]
+     </p>
+     <p>Solving for \( C \):</p>
+     <p>
+     \[
+     C = 515 + (-1.282) \cdot \frac{116}{10} = 500
+     \]</p>
+     <p><strong>Decision rule:</strong> Reject \( H_0 \) if \( \bar{X} < 500 \)</p>
+     <p><strong>Critical region:</strong> Given \( H_0, H_A \), the significance level \( \alpha \) defines critical region \( R \), where test statistic leads to rejecting \( H_0 \).</p>
+     <p>For this example: \( R = (-\infty, 500) \)</p>
+     
      <hr>
- 
+     
      <h2>Section 8.8: Type II Error and Power</h2>
-     <p><strong>Type II Error:</strong> \( \beta = P(\text{fail to reject } H_0 \mid H_A \text{ true}) \)</p>
-     <p><strong>Power:</strong> \( 1 - \beta = P(\text{correctly reject } H_0 \mid H_A \text{ true}) \)</p>
-     <p><strong>Example:</strong> Baby weights \( \sim N(30, 6^2) \), sample size \( n = 30 \)</p>
-     <p>Test \( H_0: \mu = 30 \) vs \( H_A: \mu < 30 \) at \( \alpha = 0.05 \)</p>
-     <p>Find critical value:</p>
-     <p>
-       \(
-       \alpha = 0.05 \Rightarrow z = -1.645 \Rightarrow C = 30 - 1.645 \cdot \frac{6}{\sqrt{30}} = 28.2
-       \)</p>
+     <p><strong>Definition:</strong></p>
+     <ul>
+       <li>Type II Error \( \beta = P(\text{do not reject } H_0 \mid H_A \text{ true}) \)</li>
+       <li>Power \( = 1 - \beta = P(\text{reject } H_0 \mid H_A \text{ true}) \)</li>
+     </ul>
+     <p><strong>Goal:</strong> High power (typically above 80%) is desirable.</p>
+     
+     <p><strong>Example:</strong> Baby weight: population \( \sim \mathcal{N}(30, 6^2) \), sample size \( n = 30 \)</p>
+     <p><strong>Hypotheses:</strong></p>
+     <ul>
+       <li>\( H_0: \mu = 30 \)</li>
+       <li>\( H_A: \mu < 30 \)</li>
+     </ul>
+     <p>\( \alpha = 0.05 \Rightarrow z = -1.645 \Rightarrow C = 30 + (-1.645) \cdot \frac{6}{\sqrt{30}} = 28.2 \)</p>
      <p>Reject \( H_0 \) if \( \bar{X} < 28.2 \)</p>
-     <p>Now suppose true mean is \( \mu = 27 \), calculate power:</p>
+     <p><strong>Suppose true mean \( \mu = 27 \), compute power:</strong></p>
      <p>
-       \(
-       P(\bar{X} < 28.2 \mid \mu = 27) = P\left(Z < \frac{28.2 - 27}{6 / \sqrt{30}}\right) = P(Z < 1.0947) = 0.863
-       \)</p>
-     <p><strong>Conclusion:</strong> 86.3% chance of correctly rejecting \( H_0 \) when \( \mu = 27 \)</p>
+     \[
+     P(\bar{X} < 28.2 \mid \mu = 27) = P\left(Z < \frac{28.2 - 27}{6/\sqrt{30}}\right) = P(Z < 1.0947) \approx 0.863
+     \]</p>
+     <p><strong>Conclusion:</strong> 86.3% chance of correctly rejecting \( H_0 \) if \( \mu = 27 \)</p>
+
 
   </div>
 </body>
