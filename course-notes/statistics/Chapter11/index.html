@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Hypothesis Tests (Statistic Notes)</title>
+  <title>Chapter 10: Categorical Data</title>
   <link rel="stylesheet" href="../../stylesheet.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -21,7 +21,7 @@
       margin-top: 2em;
     }
 
-    p, ul, li {
+    p, ul, li, ol {
       font-size: 16px;
       line-height: 1.6;
     }
@@ -53,188 +53,103 @@
 
 <body>
   <div id="layout-content" style="max-width: 960px; margin: 30px auto; padding: 0 50px;">
-<h1>Chapter 11: Bayesian Reasoning /h1>
 
-<h2>Section 11.1: The Monty Hall Problem</h2>
+    <h1>Chapter 10: Categorical Data</h1>
 
-<p>In the Monty Hall problem, a contestant faces three doors: behind one is a car, and behind the other two are goats.</p>
-<ul>
-  <li>The player initially chooses door 1.</li>
-  <li>The host opens one of the other doors (say door 3) to reveal a goat.</li>
-  <li>The player is offered the chance to switch to door 2.</li>
-</ul>
+    <h2>Section 10.1: Independence in Contingency Tables</h2>
+    <p>A survey asked 200 students (HS and College) whether they prefer Instagram or Snapchat:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th>Insta</th>
+          <th>Snap</th>
+          <th>Total</th>
+          <th>% Insta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>HS</td><td>34</td><td>66</td><td>100</td><td>34%</td></tr>
+        <tr><td>College</td><td>52</td><td>48</td><td>100</td><td>52%</td></tr>
+        <tr><td>Total</td><td>86</td><td>114</td><td>200</td><td>43%</td></tr>
+      </tbody>
+    </table>
 
-<h3>Should the Player Switch?</h3>
+    <p><strong>Question:</strong> Are the differences in Instagram preference due to chance?</p>
 
-<p>Let \( C_i \) be the event that the car is behind door \( i \), with \( P(C_i) = \frac{1}{3} \).</p>
+    <p><strong>Hypotheses:</strong></p>
+    <ul>
+      <li>\( H_0 \): Preference is independent of group</li>
+      <li>\( H_A \): Preference is not independent of group</li>
+    </ul>
 
-<p>We compute the conditional probabilities:</p>
+    <p>If \( H_0 \) is true, then all groups should have the same Instagram preference: 43%.</p>
 
-<p><strong>Staying with door 1:</strong></p>
-\[
-P(C_1 \mid \text{open 3}) = \frac{P(C_1) \cdot P(\text{open 3} \mid C_1)}{P(\text{open 3})} = \frac{\frac{1}{3} \cdot \frac{1}{2}}{\frac{1}{2}} = \frac{1}{3}
-\]
+    <h2>Expected Counts</h2>
+    <p>Expected values assuming independence:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th>Insta</th>
+          <th>Snap</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>HS</td><td>43</td><td>57</td><td>100</td></tr>
+        <tr><td>College</td><td>43</td><td>57</td><td>100</td></tr>
+        <tr><td>Total</td><td>86</td><td>114</td><td>200</td></tr>
+      </tbody>
+    </table>
+    <p>If \( H_0 \) is true, then observed counts should be close to expected.</p>
 
-<p><strong>Switching to door 2:</strong></p>
-\[
-P(C_2 \mid \text{open 3}) = \frac{P(C_2) \cdot P(\text{open 3} \mid C_2)}{P(\text{open 3})} = \frac{\frac{1}{3} \cdot 1}{\frac{1}{2}} = \frac{2}{3}
-\]
+    <h2>Section 10.2: Permutation Test of Independence</h2>
+    <p>If group and preference are independent, then any permutation of preferences is equally likely.</p>
+    <p><strong>Steps:</strong></p>
+    <ol>
+      <li>Randomly permute preference labels among individuals</li>
+      <li>For each permutation, compute the chi-squared statistic \( C_i \)</li>
+      <li>Repeat to generate empirical distribution of \( C \)</li>
+      <li>Compare observed \( C \) to this distribution</li>
+    </ol>
 
-<p><strong>Conclusion:</strong> The player should switch. The probability of winning by switching is higher: \( \frac{2}{3} \) vs. \( \frac{1}{3} \).</p>
+    <p><strong>p-value:</strong> \( p = P(C \ge C_{\text{obs}}) \)</p>
+    <p>If \( p \) is small, reject independence.</p>
 
-<hr>
+    <h2>Section 10.3: Chi-Square Test of Independence</h2>
+    <p><strong>Chi-squared statistic:</strong></p>
+    <p>
+      \[
+      C = \sum \frac{(O - E)^2}{E}
+      \]
+    </p>
 
-<h2>Section 11.2: Binomial Data with Discrete Prior</h2>
+    <p>Example: for observed vs expected counts:</p>
+    <p>
+      \[
+      C = \frac{(34 - 43)^2}{43} + \frac{(66 - 57)^2}{57} + \frac{(52 - 43)^2}{43} + \frac{(48 - 57)^2}{57} = 6.6
+      \]
+    </p>
 
-<h3>Problem Setup</h3>
-<p>We model a tennis match between Player A and B. Let \( \theta \) represent the probability that Player A wins a game.</p>
+    <p>Large \( C \Rightarrow \) large deviation between observed and expected → group matters.</p>
 
-<ul>
-  <li>\( \theta \) is unknown but assumed to take values from a discrete set: \( \{0, 0.25, 0.5, 0.75, 1\} \)</li>
-  <li>We assign a prior distribution \( P(\theta_j) \) over these values before any games are played.</li>
-</ul>
+    <p><strong>Distribution under \( H_0 \):</strong> Chi-square with degrees of freedom:</p>
+    <p>
+      \[
+      df = (r - 1)(c - 1) = (2 - 1)(2 - 1) = 1
+      \]
+    </p>
 
-<h3>Discrete Prior</h3>
-<table>
-  <thead>
-    <tr>
-      <th>\( \theta_j \)</th>
-      <th>Interpretation</th>
-      <th>Prior \( P(\theta_j) \)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>0</td><td>A always loses</td><td>0</td></tr>
-    <tr><td>0.25</td><td>A is weak</td><td>0.2</td></tr>
-    <tr><td>0.5</td><td>Even match</td><td>0.3</td></tr>
-    <tr><td>0.75</td><td>A is strong</td><td>0.5</td></tr>
-    <tr><td>1</td><td>A always wins</td><td>0</td></tr>
-  </tbody>
-</table>
+    <p><strong>p-value:</strong></p>
+    <p>
+      \[
+      P(C \ge 6.6) = 0.01
+      \]
+    </p>
 
-<p>Prior expected value:</p>
-\[
-\mathbb{E}[\theta] = \sum_j \theta_j P(\theta_j) = 0.575
-\]
+    <p><strong>Conclusion:</strong> Reject \( H_0 \): group affects preference.</p>
 
-<h3>Observed Data</h3>
-<p>We observe 3 game outcomes: Win, Loss, Loss (WLL)</p>
-<p>Each game is a Bernoulli trial. The likelihood of this sequence for a given \( \theta_j \) is:</p>
-\[
-P(X \mid \theta_j) = \theta_j \cdot (1 - \theta_j)^2
-\]
-
-<h3>Bayesian Update Table</h3>
-<table>
-  <thead>
-    <tr>
-      <th>\( \theta_j \)</th>
-      <th>Prior</th>
-      <th>Likelihood</th>
-      <th>Prior × Likelihood</th>
-      <th>Posterior</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-    <tr><td>0.25</td><td>0.2</td><td>0.141</td><td>0.0282</td><td>0.316</td></tr>
-    <tr><td>0.5</td><td>0.3</td><td>0.125</td><td>0.0375</td><td>0.420</td></tr>
-    <tr><td>0.75</td><td>0.5</td><td>0.047</td><td>0.0235</td><td>0.263</td></tr>
-    <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-  </tbody>
-</table>
-
-<p>Marginal probability of observing the data:</p>
-\[
-P(X) = \sum_j P(\theta_j) \cdot P(X \mid \theta_j) = 0.0892
-\]
-
-<h3>Posterior Expected Value</h3>
-<p>Using the posterior distribution:</p>
-\[
-\mathbb{E}[\theta \mid X] = \sum_j \theta_j \cdot P(\theta_j \mid X) = 0.486
-\]
-
-<p><strong>Conclusion:</strong> After observing A win once and lose twice, our belief in A's strength decreases (from 0.575 to 0.486).</p>
-
-
-<h2>Section 11.3: Binomial Data with Continuous Prior</h2>
-
-<h2>Bayes' Theorem for Continuous Prior</h2>
-<p>When the prior \( \pi(\theta) \) is continuous, the posterior is given by:</p>
-<p>
-\[
-P(\theta \mid X) = \frac{\pi(\theta) \cdot p(X \mid \theta)}{\int_0^1 \pi(\theta) p(X \mid \theta) d\theta}
-\]
-</p>
-<p>This integral in the denominator is often intractable and requires numerical approximation unless a conjugate prior is used.</p>
-<p>In binomial models, a common choice is:</p>
-<p>
-\[ \theta \sim \text{Beta}(\alpha, \beta) \]</p>
-
-<h2>Beta Distribution Summary</h2>
-<p>The Beta distribution has the form:</p>
-<p>
-\[
-\text{Beta}(\alpha, \beta) \propto \theta^{\alpha - 1} (1 - \theta)^{\beta - 1}, \quad 0 \le \theta \le 1
-\]</p>
-<p>Mean and variance:</p>
-<ul>
-  <li>\( \mathbb{E}[\theta] = \frac{\alpha}{\alpha + \beta} \)</li>
-  <li>\( \text{Var}[\theta] = \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)} \)</li>
-</ul>
-<p>Special cases:</p>
-<ul>
-  <li>Beta(1,1) = Uniform(0,1), called the "flat prior"</li>
-  <li>For \(\alpha > 1, \beta > 1\), the density is unimodal</li>
-</ul>
-
-<h2>Example: Tennis Match (Beta Prior)</h2>
-<p>Prior: \( \theta \sim \text{Beta}(\alpha=3, \beta=2) \)</p>
-<p>Observed data: 8 matches, 3 wins, 5 losses</p>
-<p>Posterior:</p>
-<p>
-\[ \theta \mid X \sim \text{Beta}(\alpha + w, \beta + l) = \text{Beta}(6, 7) \]</p>
-<p>Posterior mean:</p>
-<p>
-\[ \mathbb{E}[\theta \mid X] = \frac{6}{13} = 0.46 \]</p>
-<p>Posterior variance:</p>
-<p>
-\[ \text{Var}[\theta \mid X] = 0.018 \]</p>
-
-<h2>95% Credible Interval</h2>
-<p>From the Beta(6,7) posterior, the 95% credible interval is:</p>
-<p>
-\[ q_{0.025} < \theta < q_{0.975} = [0.21, 0.72] \]</p>
-<p>These are obtained via quantiles of the Beta distribution using \( q_\alpha = \text{qbeta}(\alpha, \alpha, \beta) \).</p>
-
-<h2>On Choosing a Beta Prior</h2>
-<h3>1. Improper Prior: Beta(0,0)</h3>
-<p>
-\( \pi(\theta) \propto \frac{1}{\theta(1 - \theta)} \): improper because it does not integrate to 1.
-</p>
-<p>Used as a "non-informative prior". It results in posterior:</p>
-<p>
-\[ \theta \mid X \sim \text{Beta}(w, l) \Rightarrow \mathbb{E}[\theta \mid X] = \frac{w}{n} \]</p>
-<p>Posterior equals empirical win rate, prior has no influence.</p>
-
-<h3>2. Setting Beta Prior with Given Mean and Variance</h3>
-<p>Given \( \mu = \mathbb{E}[\theta], \sigma^2 = \text{Var}[\theta] \), solve:</p>
-<ul>
-  <li>\( \mu = \frac{\alpha}{\alpha + \beta} \)</li>
-  <li>\( \sigma^2 = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)} \)</li>
-</ul>
-<p>Let \( m = \alpha + \beta \):</p>
-<ul>
-  <li>\( \alpha = m \mu, \beta = m(1 - \mu) \)</li>
-  <li>\( m = \frac{\mu(1 - \mu)}{\sigma^2} - 1 \)</li>
-</ul>
-<p>Example: \( \mu = 0.58, \sigma^2 = 0.0009 \)</p>
-<ul>
-  <li>\( m \approx 269.67 \)</li>
-  <li>\( \alpha = 156.4, \beta = 113.3 \)</li>
-</ul>
-<p>This gives a highly informative Beta prior concentrated around 0.58.</p>
-
+  </div>
 </body>
 </html>
