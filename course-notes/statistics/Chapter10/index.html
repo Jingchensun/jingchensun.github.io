@@ -2,52 +2,44 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Section 10 - Categorical Data</title>
+  <title>Chapter 10: Categorical Data</title>
   <link rel="stylesheet" href="../../stylesheet.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
-    body {
-      font-family: Georgia, serif;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 40px;
+    h1 {
+      text-align: center;
+      color: #527bbd;
+      font-size: 165%;
+      margin-bottom: 40px;
+      border-bottom: none;
+    }
+    h2 {
+      color: #2471A3;
+      font-size: 125%;
+      margin-top: 2em;
+    }
+    p, ul, li {
+      font-size: 16px;
       line-height: 1.6;
     }
-    h1, h2, h3 {
-      color: #2e6da4;
-    }
-    p, li {
-      font-size: 16px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 10px;
-      text-align: center;
-    }
-    code {
-      background: #f4f4f4;
-      padding: 2px 4px;
-      border-radius: 3px;
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 40px 0;
     }
   </style>
 </head>
 <body>
+<div id="layout-content" style="max-width: 960px; margin: 30px auto; padding: 0 50px;">
 
-<h1>Section 10: Categorical Data</h1>
+<h1>Chapter 10: Categorical Data</h1>
 
-<h2>10.1: Independence in Contingency Tables</h2>
-<p><strong>Example:</strong> A survey of 200 students (HS and College) asks for preference between Instagram and Snapchat.</p>
+<h2>Section 10.1: Independence in Contingency Tables</h2>
+<p>A survey asked 200 students (HS and College) whether they prefer Instagram or Snapchat:</p>
 <table>
   <thead>
-    <tr><th>Group</th><th>Insta</th><th>Snap</th><th>Row Sum</th><th>% Insta</th></tr>
+    <tr><th>Group</th><th>Insta</th><th>Snap</th><th>Total</th><th>% Insta</th></tr>
   </thead>
   <tbody>
     <tr><td>HS</td><td>34</td><td>66</td><td>100</td><td>34%</td></tr>
@@ -55,15 +47,19 @@
     <tr><td>Total</td><td>86</td><td>114</td><td>200</td><td>43%</td></tr>
   </tbody>
 </table>
+<p><strong>Question:</strong> Are the differences in Instagram preference due to chance?</p>
 <p><strong>Hypotheses:</strong></p>
 <ul>
-  <li>\( H_0 \): Instagram preference is independent of group</li>
-  <li>\( H_A \): Instagram preference depends on group</li>
+  <li>\( H_0 \): Preference is independent of group</li>
+  <li>\( H_A \): Preference is not independent of group</li>
 </ul>
-<p><strong>Expected Counts under \( H_0 \):</strong></p>
+<p>If \( H_0 \) is true, then all groups should have the same Instagram preference: 43%.</p>
+
+<h2>Expected Counts</h2>
+<p>Expected values assuming independence:</p>
 <table>
   <thead>
-    <tr><th>Group</th><th>Insta</th><th>Snap</th><th>Row Sum</th></tr>
+    <tr><th>Group</th><th>Insta</th><th>Snap</th><th>Total</th></tr>
   </thead>
   <tbody>
     <tr><td>HS</td><td>43</td><td>57</td><td>100</td></tr>
@@ -71,55 +67,35 @@
     <tr><td>Total</td><td>86</td><td>114</td><td>200</td></tr>
   </tbody>
 </table>
-<p><strong>Chi-Squared Statistic:</strong></p>
-<p>
-\[ C = \sum_{\text{all cells}} \frac{(O - E)^2}{E} = 6.6 \]</p>
-<p>Large \( C \Rightarrow \) large deviation between observed and expected → group matters.</p>
-<p><strong>p-value from chi-squared distribution:</strong></p>
-<p>
-\[ P(C \ge 6.6) = 0.01 \quad \text{(df = 1)} \]</p>
-<p><strong>Conclusion:</strong> Reject \( H_0 \). Group has an effect.</p>
+<p>If \( H_0 \) is true, then observed counts should be close to expected.</p>
 
-<hr>
-
-<h2>10.2: Permutation Test of Independence</h2>
-<p><strong>Idea:</strong> If group and preference are independent, then any permutation of the preferences is equally likely.</p>
-<p><strong>Example:</strong> Education group vs Death Penalty preference (Favor or Oppose)</p>
-<p>Steps:</p>
+<h2>Section 10.2: Permutation Test of Independence</h2>
+<p>If group and preference are independent, then any permutation of preferences is equally likely.</p>
+<p><strong>Steps:</strong></p>
 <ol>
-  <li>Randomly permute preference labels while keeping group labels fixed</li>
-  <li>Recalculate chi-squared statistic \( C_i \) for each permutation</li>
-  <li>Repeat to get empirical distribution: \( C_1, C_2, \dots, C_N \)</li>
+  <li>Randomly permute preference labels among individuals</li>
+  <li>For each permutation, compute the chi-squared statistic \( C_i \)</li>
+  <li>Repeat to generate empirical distribution of \( C \)</li>
+  <li>Compare observed \( C \) to this distribution</li>
 </ol>
-<p><strong>p-value:</strong></p>
-<p>
-\[ p = P(C \ge C_{\text{obs}}) \]</p>
-<p>If observed \( C \) lies in the tail → reject independence</p>
+<p><strong>p-value:</strong> \( p = P(C \ge C_{\text{obs}}) \)</p>
+<p>If \( p \) is small, reject independence.</p>
 
-<hr>
+<h2>Section 10.3: Chi-Square Test of Independence</h2>
+<p><strong>Chi-squared statistic:</strong></p>
+<p>\[ C = \sum \frac{(O - E)^2}{E} \]</p>
+<p>Example: for observed vs expected counts:</p>
+<p>
+\[ C = \frac{(34 - 43)^2}{43} + \frac{(66 - 57)^2}{57} + \frac{(52 - 43)^2}{43} + \frac{(48 - 57)^2}{57} = 6.6 \]</p>
+<p>Large \( C \Rightarrow \) large deviation between observed and expected → group matters.</p>
 
-<h2>10.3: Chi-Square Test of Independence</h2>
-<p><strong>Definition:</strong> A chi-square test assesses whether observed frequencies in a contingency table differ significantly from expected frequencies under the assumption of independence.</p>
-<p>Test statistic:</p>
+<p><strong>Distribution under \( H_0 \):</strong> Chi-square with degrees of freedom:</p>
 <p>
-\[ C = \sum \frac{(O - E)^2}{E} \]</p>
-<p>Where:</p>
-<ul>
-  <li>\( O \): observed count in each cell</li>
-  <li>\( E \): expected count under independence</li>
-</ul>
-<p><strong>Degrees of Freedom:</strong></p>
-<p>
-\[ df = (r - 1)(c - 1) \quad \text{(where r = #rows, c = #columns)} \]</p>
-<p><strong>Distribution under \( H_0 \):</strong></p>
-<p>
-\[ C \sim \chi^2(df) \]</p>
-<p>Use p-value from chi-square distribution to determine significance.</p>
-<p><strong>Decision:</strong></p>
-<ul>
-  <li>If \( p \le \alpha \): Reject \( H_0 \), conclude dependence</li>
-  <li>If \( p > \alpha \): Fail to reject \( H_0 \)</li>
-</ul>
+\[ df = (r - 1)(c - 1) = (2 - 1)(2 - 1) = 1 \]</p>
+<p><strong>p-value:</strong>
+\[ P(C \ge 6.6) = 0.01 \]</p>
+<p><strong>Conclusion:</strong> Reject \( H_0 \): group affects preference.</p>
 
+</div>
 </body>
 </html>
