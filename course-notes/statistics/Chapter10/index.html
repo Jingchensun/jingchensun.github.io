@@ -2,131 +2,124 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Chapter 9: Regression and Correlation</title>
+  <title>Section 10 - Categorical Data</title>
   <link rel="stylesheet" href="../../stylesheet.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
-    h1 {
-      text-align: center;
-      color: #527bbd;
-      font-size: 165%;
-      margin-bottom: 40px;
-      border-bottom: none;
-    }
-
-    h2 {
-      color: #2471A3;
-      font-size: 125%;
-      margin-top: 2em;
-    }
-
-    p, ul, li {
-      font-size: 16px;
+    body {
+      font-family: Georgia, serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 40px;
       line-height: 1.6;
     }
-
-    hr {
-      border: none;
-      border-top: 1px solid #ccc;
-      margin: 40px 0;
+    h1, h2, h3 {
+      color: #2e6da4;
+    }
+    p, li {
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 3px;
     }
   </style>
 </head>
-
 <body>
-<div id="layout-content" style="max-width: 960px; margin: 30px auto; padding: 0 50px;">
 
-  <h1>Chapter 9: Regression and Correlation</h1>
+<h1>Section 10: Categorical Data</h1>
 
-  <h2>Section 9.1: Covariance</h2>
-  <p>\(\text{Cov}(X, Y) = \mathbb{E}[(X - \mu_X)(Y - \mu_Y)] = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]\)</p>
-  <ul>
-    <li>If \( X, Y \) are independent, then \( \text{Cov}(X, Y) = 0 \)</li>
-    <li>Positive correlation: \( \text{Cov}(X, Y) > 0 \)</li>
-    <li>Negative correlation: \( \text{Cov}(X, Y) < 0 \)</li>
-    <li>\( \text{Cov}(X, X) = \text{Var}(X) \geq 0 \)</li>
-  </ul>
+<h2>10.1: Independence in Contingency Tables</h2>
+<p><strong>Example:</strong> A survey of 200 students (HS and College) asks for preference between Instagram and Snapchat.</p>
+<table>
+  <thead>
+    <tr><th>Group</th><th>Insta</th><th>Snap</th><th>Row Sum</th><th>% Insta</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>HS</td><td>34</td><td>66</td><td>100</td><td>34%</td></tr>
+    <tr><td>College</td><td>52</td><td>48</td><td>100</td><td>52%</td></tr>
+    <tr><td>Total</td><td>86</td><td>114</td><td>200</td><td>43%</td></tr>
+  </tbody>
+</table>
+<p><strong>Hypotheses:</strong></p>
+<ul>
+  <li>\( H_0 \): Instagram preference is independent of group</li>
+  <li>\( H_A \): Instagram preference depends on group</li>
+</ul>
+<p><strong>Expected Counts under \( H_0 \):</strong></p>
+<table>
+  <thead>
+    <tr><th>Group</th><th>Insta</th><th>Snap</th><th>Row Sum</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>HS</td><td>43</td><td>57</td><td>100</td></tr>
+    <tr><td>College</td><td>43</td><td>57</td><td>100</td></tr>
+    <tr><td>Total</td><td>86</td><td>114</td><td>200</td></tr>
+  </tbody>
+</table>
+<p><strong>Chi-Squared Statistic:</strong></p>
+<p>
+\[ C = \sum_{\text{all cells}} \frac{(O - E)^2}{E} = 6.6 \]</p>
+<p>Large \( C \Rightarrow \) large deviation between observed and expected → group matters.</p>
+<p><strong>p-value from chi-squared distribution:</strong></p>
+<p>
+\[ P(C \ge 6.6) = 0.01 \quad \text{(df = 1)} \]</p>
+<p><strong>Conclusion:</strong> Reject \( H_0 \). Group has an effect.</p>
 
-  <p><strong>Covariance of a Sum:</strong></p>
-  <p>\(\text{Cov}(X_1 + X_2, Y) = \text{Cov}(X_1, Y) + \text{Cov}(X_2, Y)\)</p>
+<hr>
 
-  <p><strong>Variance of a Sum:</strong></p>
-  <p>\(\text{Var}(X + Y) = \text{Var}(X) + 2\text{Cov}(X, Y) + \text{Var}(Y)\)</p>
-  <p>If \( X \perp Y \), then: \(\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)\)</p>
+<h2>10.2: Permutation Test of Independence</h2>
+<p><strong>Idea:</strong> If group and preference are independent, then any permutation of the preferences is equally likely.</p>
+<p><strong>Example:</strong> Education group vs Death Penalty preference (Favor or Oppose)</p>
+<p>Steps:</p>
+<ol>
+  <li>Randomly permute preference labels while keeping group labels fixed</li>
+  <li>Recalculate chi-squared statistic \( C_i \) for each permutation</li>
+  <li>Repeat to get empirical distribution: \( C_1, C_2, \dots, C_N \)</li>
+</ol>
+<p><strong>p-value:</strong></p>
+<p>
+\[ p = P(C \ge C_{\text{obs}}) \]</p>
+<p>If observed \( C \) lies in the tail → reject independence</p>
 
-  <h2>Calculating Covariance from Joint PDF</h2>
-  <p>Example joint pdf: \( f(x, y) = \frac{3}{2}(x^2 + y^2), \quad 0 < x, y < 1 \)</p>
-  <p>Then: \(\text{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] = \frac{3}{8} - \frac{5}{8} \cdot \frac{5}{8} = -\frac{1}{64}\)</p>
+<hr>
 
-  <hr>
+<h2>10.3: Chi-Square Test of Independence</h2>
+<p><strong>Definition:</strong> A chi-square test assesses whether observed frequencies in a contingency table differ significantly from expected frequencies under the assumption of independence.</p>
+<p>Test statistic:</p>
+<p>
+\[ C = \sum \frac{(O - E)^2}{E} \]</p>
+<p>Where:</p>
+<ul>
+  <li>\( O \): observed count in each cell</li>
+  <li>\( E \): expected count under independence</li>
+</ul>
+<p><strong>Degrees of Freedom:</strong></p>
+<p>
+\[ df = (r - 1)(c - 1) \quad \text{(where r = #rows, c = #columns)} \]</p>
+<p><strong>Distribution under \( H_0 \):</strong></p>
+<p>
+\[ C \sim \chi^2(df) \]</p>
+<p>Use p-value from chi-square distribution to determine significance.</p>
+<p><strong>Decision:</strong></p>
+<ul>
+  <li>If \( p \le \alpha \): Reject \( H_0 \), conclude dependence</li>
+  <li>If \( p > \alpha \): Fail to reject \( H_0 \)</li>
+</ul>
 
-  <h2>Section 9.2: Correlation</h2>
-  <p>\(\rho(X, Y) = \frac{\text{Cov}(X, Y)}{\sqrt{\text{Var}(X)} \cdot \sqrt{\text{Var}(Y)}}\)</p>
-  <p>\(\rho\) is invariant to linear transformation: \(\rho(a + bX, Y) = \rho(X, Y)\)</p>
-
-  <p>Let \( X = \mu_X + \sigma_X Z_X, \quad Y = \mu_Y + \sigma_Y Z_Y \), then:</p>
-  <p>\(\rho(X, Y) = \rho(Z_X, Z_Y) = \text{Cov}(Z_X, Z_Y)\)</p>
-
-  <p>\( |\rho| \leq 1 \), with equality if \( Y = \frac{\sigma_Y}{\sigma_X}X + a \)</p>
-
-  <hr>
-
-  <h2>Sample Correlation</h2>
-  <p>\( r \approx \rho = \frac{1}{n} \sum (x_i - \bar{x})(y_i - \bar{y}) \bigg/ \sqrt{\frac{1}{n} \sum (x_i - \bar{x})^2} \cdot \sqrt{\frac{1}{n} \sum (y_i - \bar{y})^2} \)</p>
-
-  <p>Alternate form:</p>
-  <p>\( r = \frac{ \left( \frac{1}{n} \sum x_i y_i \right) - \bar{x}\bar{y} }{ s_x s_y } \)</p>
-
-  <p><strong>Interpretation of \( r \):</strong></p>
-  <ul>
-    <li>\( r = -1 \): perfect negative linear relationship</li>
-    <li>\( r = 0 \): no correlation</li>
-    <li>\( r = +1 \): perfect positive linear relationship</li>
-  </ul>
-
-  <hr>
-
-  <h2>Section 9.3: Least Squares Regression</h2>
-  <p>Model: \( \hat{y} = a + bx \)</p>
-  <p>Minimize squared error: \( S(a, b) = \sum (y_i - (a + b x_i))^2 \)</p>
-
-  <p>Solution:</p>
-  <ul>
-    <li>\( b = \frac{\overline{xy} - \bar{x} \bar{y}}{\overline{x^2} - (\bar{x})^2} \)</li>
-    <li>\( a = \bar{y} - b\bar{x} \)</li>
-  </ul>
-
-  <p>Alternate form for slope:</p>
-  <p>\( b = \frac{ \sum (x_i - \bar{x})(y_i - \bar{y}) }{ \sum (x_i - \bar{x})^2 } = \frac{\text{Cov}(x, y)}{\text{Var}(x)} \)</p>
-
-  <hr>
-
-  <h2>Properties of Regression Lines</h2>
-  <p>\( b = r \cdot \frac{s_y}{s_x} \)</p>
-  <p>\( r^2 = \frac{\text{variation in predicted values}}{\text{variation in observed values}} \)</p>
-  <p>\( r^2 \in [0, 1] \): indicates how well the regression explains the variation in \( y \)</p>
-  <p><em>See R code <li><a href="ch9_regression.html" target="_blank">ch9_regression.html</a> for full derivations and examples.</em></p>
-  
-  <hr>
-
-  <h2>Residual Analysis</h2>
-  <p>Residual: \( \varepsilon_i = y_i - \hat{y}_i \)</p>
-  <p>Variance of residuals: \( s_e^2 = \frac{1}{n - 1} \sum (y_i - \hat{y}_i)^2 \)</p>
-
-  <p><strong>Plot of residuals vs x</strong> should show random scatter without trend.</p>
-  <p>If residuals show a pattern (e.g., parabolic), consider nonlinear models.</p>
-
-  <p><strong>Outliers:</strong> Can affect small datasets; only remove if justified.</p>
-
-  <p><strong>Section 9.4:</strong> Inference on regression coefficients \( a, b \), including error bars.</p>
-
-  <h2>Other Regression Models</h2>
-  <ul>
-    <li><strong>Multiple regression:</strong> \( \hat{y} = a + b x_1 + c x_2 + d x_3 \)</li>
-    <li><strong>Higher-order regression:</strong> \( \hat{y} = a + b x + c x^2 + d x^3 \)</li>
-  </ul>
-
-</div>
 </body>
 </html>
