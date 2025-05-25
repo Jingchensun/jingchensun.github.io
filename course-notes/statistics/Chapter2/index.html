@@ -2,30 +2,153 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Statistical Inference Notes</title>
+  <title>Chapter 1: Data and Case Studies</title>
   <link rel="stylesheet" href="../../stylesheet.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    h1 {
+      text-align: center;
+      color: #527bbd;
+      font-size: 165%;
+      margin-bottom: 40px;
+      border-bottom: none;
+    }
+
+    h2 {
+      color: #2471A3;
+      font-size: 125%;
+      margin-top: 2em;
+    }
+
+    p, ul, li {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 40px 0;
+    }
+  </style>
 </head>
+
 <body>
+<div id="layout-content" style="max-width: 960px; margin: 30px auto; padding: 0 50px;">
 
-  <h1>Statistical Inference Notes</h1>
+  <h1>Chapter 1: Data and Case Studies</h1>
 
-  <h2>📘 Course Description</h2>
-  <p>This course provides a mathematical foundation for classical and modern statistical inference. Topics include point estimation, confidence intervals, hypothesis testing, likelihood theory, and bootstrap techniques.</p>
-
-  <h2>📚 Reference Book</h2>
-  <p><strong>Statistical Inference (2nd Edition)</strong> by George Casella and Roger L. Berger</p>
-
-  <h2>🧾 Chapters</h2>
+  <h2>Section 1.1: Introduction to Data</h2>
+  <p>Statistics is driven by <strong>real applications</strong>:</p>
   <ul>
-    <li><a href="Chapter1/index.html">Chapter 1: Probability Review</a></li>
-    <li><a href="Chapter2/index.html">Chapter 2: Point Estimation</a></li>
-    <li><a href="Chapter3/index.html">Chapter 3: Confidence Intervals</a></li>
-    <li><a href="Chapter4/index.html">Chapter 4: Hypothesis Testing Basics</a></li>
-    <li><a href="Chapter5/index.html">Chapter 5: Likelihood Ratio Tests</a></li>
-    <li><a href="Chapter6/index.html">Chapter 6: Sufficiency & Completeness</a></li>
-    <li><a href="Chapter7/index.html">Chapter 7: Bayesian Inference</a></li>
-    <li><a href="Chapter8/chapter8.html">Chapter 8: Bootstrap and Resampling</a></li>
+    <li>Collect data</li>
+    <li>Understand what it means</li>
+  </ul>
+  <p><strong>Example (Sec 1.1: Flight Delays)</strong>:</p>
+  <ul>
+    <li>Columns = variables</li>
+    <li>Rows = observations</li>
   </ul>
 
+  <hr>
+
+  <h2>Section 1.2: Types of Data</h2>
+  <ul>
+    <li><strong>Population</strong>: Data for all individuals or observations (finite or infinite)</li>
+    <li><strong>Sample</strong>: Data from a subset of the population</li>
+    <li><strong>Random sample</strong>: Observations are chosen randomly</li>
+  </ul>
+  <p><strong>Statistical inference</strong>: Making conclusions about a population based on a sample.</p>
+
+  <p><strong>Notation</strong>:</p>
+  <ul>
+    <li>Capital letters \( X, Y, Z \): random variables</li>
+    <li>Lowercase letters \( x_1, x_2, \ldots \): observed values (data)</li>
+  </ul>
+
+  <hr>
+
+  <h2>Section 1.3: Observations</h2>
+  <h3>Observations of a Random Process</h3>
+  <p>Population is infinite. Random sample means independent and identically distributed (i.i.d) observations.</p>
+  <p><strong>Example:</strong> Let \( X \in \{0, 1\} \) with equal probability → Bernoulli distribution:</p>
+  <p>\( X \sim \text{Bern}(p) \), where:</p>
+  <p>\[
+    X = \begin{cases}
+    1 & \text{with probability } p \\
+    0 & \text{with probability } 1 - p
+    \end{cases}
+  \]</p>
+
+  <h3>Observations of Data</h3>
+  <p>Population is finite. May not come from a known random process.</p>
+  <p><strong>Example:</strong> Population = \{1, 2, 3, 3̅, 7\} (size \( N = 5 \))</p>
+  <ul>
+    <li><strong>Sampling with replacement</strong>: sample = \{2, 3, 2\}</li>
+    <li><strong>Sampling without replacement</strong>: sample = \{7, 3, 3̅\}</li>
+  </ul>
+  <p>If \( N \gg n \), both methods yield similar results.</p>
+
+  <hr>
+
+  <h2>Section 1.4: Statistics vs Parameters</h2>
+  <ul>
+    <li><strong>Statistic</strong>: numerical characteristic of a sample</li>
+    <li><strong>Parameter</strong>: numerical characteristic of a population or a probability distribution</li>
+  </ul>
+
+  <p><strong>Examples:</strong></p>
+  <ul>
+    <li>\( X \sim \mathcal{N}(\mu, \sigma^2) \): \( \mu, \sigma \) are parameters</li>
+    <li>Sample mean: \( \bar{X} = \frac{1}{n} \sum_{i=1}^n X_i \): statistic (also a random variable)</li>
+    <li>Data mean: \( \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i \): statistic</li>
+    <li>Population = all babies born in US in 2004:
+      <ul>
+        <li>Mean of population = parameter \( \mu \)</li>
+        <li>Mean of sample of 200 babies = statistic \( \bar{x} \)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h2>Section 1.5: Surveys</h2>
+  <p><strong>Survey</strong>: Ask people what they think or how they live</p>
+  <p><strong>Sample survey</strong>: Use a sample from the population due to practicality</p>
+  <ul>
+    <li>Population → Sampling Frame → Random Sample</li>
+  </ul>
+
+  <p><strong>Example:</strong> General Social Survey (GSS)</p>
+  <ul>
+    <li>Surveys on sociological factors: gender, income, education, etc.</li>
+    <li>Archived online since 1970s, evolving questions</li>
+    <li>Uses multilevel stratified sampling (not covered in this course)</li>
+  </ul>
+
+  <hr>
+
+  <h2>Section 1.6: Observational vs Experimental Studies</h2>
+  <p><strong>Observational Study:</strong> Observe only, no intervention</p>
+  <p><strong>Example:</strong> Beer and hot wings consumption (Sec. 1.9)</p>
+
+  <p><strong>Experimental Study:</strong> Change conditions or give treatment</p>
+  <ul>
+    <li>Treatment group vs control group</li>
+    <li>Random assignment of subjects to groups</li>
+  </ul>
+
+  <p><strong>Example:</strong> Tree seedling growth under different fertilizer/competition (Sec. 1.10)</p>
+
+  <p><strong>Caution:</strong> Non-random samples → results not generalizable</p>
+  <p><strong>Example:</strong> Tai Chi arthritis study (Sec. 1.11)</p>
+  <ul>
+    <li>All volunteers → cannot generalize to broader population</li>
+  </ul>
+
+  <hr>
+
+</div>
 </body>
 </html>

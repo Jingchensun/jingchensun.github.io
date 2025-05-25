@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Chapter 1: Probability Review</title>
+  <title>Chapter 1: Probability Review & Parameters and Statistics</title>
   <link rel="stylesheet" href="../../stylesheet.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -37,9 +37,9 @@
 <body>
 <div id="layout-content" style="max-width: 960px; margin: 30px auto; padding: 0 50px;">
 
-  <h1>Chapter 1: Probability Review</h1>
+  <h1>Chapter 1: Probability Review & Parameters and Statistics </h1>
 
-  <h2>Section 1.1: Fundamentals of Probability</h2>
+  <h2>Fundamentals of Probability</h2>
   <p>The <strong>sample space</strong> \( S \) is the set of all possible outcomes of a random experiment.</p>
   <p>Example: Rolling a 6-sided die → \( S = \{1, 2, 3, 4, 5, 6\} \)</p>
   <p>A <strong>discrete random variable</strong> maps outcomes to a countable set: \( X: S \rightarrow \{x_1, x_2, \ldots\} \)</p>
@@ -94,7 +94,7 @@
 
   <hr>
 
-  <h2>Section 1.2: Sample Mean of Random Variables</h2>
+  <h2>Sample Mean of Random Variables</h2>
   <p>Let \( X_1, X_2, \ldots, X_n \) be independent and identically distributed (i.i.d.) random variables with mean \( \mu \) and variance \( \sigma^2 \).</p>
   <p>The <strong>sample mean</strong> is defined as \( \bar{X} = \frac{1}{n} \sum_{j=1}^{n} X_j \).</p>
   <ul>
@@ -110,7 +110,7 @@
 
   <hr>
 
-  <h2>Section 1.3: Normal Distribution</h2>
+  <h2>Normal Distribution</h2>
   <p><strong>Normal Distribution:</strong> \( X \sim \mathcal{N}(\mu, \sigma^2) \)</p>
   <p>PDF: \( f(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{- \frac{(x - \mu)^2}{2\sigma^2}} \)</p>
 
@@ -133,7 +133,7 @@
 
   <hr>
 
-  <h2>Section 1.4: Normal Distribution Application Example</h2>
+  <h2>Normal Distribution Application Example</h2>
   <p><strong>Example:</strong> Weight of boys \( X \sim \mathcal{N}(100, 5^2) \), weight of girls \( Y \sim \mathcal{N}(90, 6^2) \)</p>
   <p>Want: \( P(X - Y > 6) \)</p>
   <ul>
@@ -144,7 +144,7 @@
 
   <hr>
 
-  <h2>Section 1.5: Sum of Independent Normal Variables & Moment Generating Functions</h2>
+  <h2>Sum of Independent Normal Variables & Moment Generating Functions</h2>
   <p>Let \( X_i \sim \mathcal{N}(\mu_i, \sigma_i^2) \), and define \( X = \sum a_i X_i \).</p>
   <ul>
     <li>\( \mu = \sum a_i \mu_i \)</li>
@@ -162,6 +162,116 @@
 
   <p><strong>Moment Generating Function:</strong> \( M(t) = \mathbb{E}[e^{tX}] \)</p>
   <p>\( \frac{d^n}{dt^n} M(t) \bigg|_{t = 0} = \mathbb{E}[X^n] \)</p>
+
+  <h1>Chapter 1: Data and Case Studies</h1>
+
+  <h2>Section 1.1: Introduction to Data</h2>
+  <p>Statistics is driven by <strong>real applications</strong>:</p>
+  <ul>
+    <li>Collect data</li>
+    <li>Understand what it means</li>
+  </ul>
+  <p><strong>Example (Sec 1.1: Flight Delays)</strong>:</p>
+  <ul>
+    <li>Columns = variables</li>
+    <li>Rows = observations</li>
+  </ul>
+
+  <hr>
+
+  <h2>Section 1.2: Types of Data</h2>
+  <ul>
+    <li><strong>Population</strong>: Data for all individuals or observations (finite or infinite)</li>
+    <li><strong>Sample</strong>: Data from a subset of the population</li>
+    <li><strong>Random sample</strong>: Observations are chosen randomly</li>
+  </ul>
+  <p><strong>Statistical inference</strong>: Making conclusions about a population based on a sample.</p>
+
+  <p><strong>Notation</strong>:</p>
+  <ul>
+    <li>Capital letters \( X, Y, Z \): random variables</li>
+    <li>Lowercase letters \( x_1, x_2, \ldots \): observed values (data)</li>
+  </ul>
+
+  <hr>
+
+  <h2>Section 1.3: Observations</h2>
+  <h3>Observations of a Random Process</h3>
+  <p>Population is infinite. Random sample means independent and identically distributed (i.i.d) observations.</p>
+  <p><strong>Example:</strong> Let \( X \in \{0, 1\} \) with equal probability → Bernoulli distribution:</p>
+  <p>\( X \sim \text{Bern}(p) \), where:</p>
+  <p>\[
+    X = \begin{cases}
+    1 & \text{with probability } p \\
+    0 & \text{with probability } 1 - p
+    \end{cases}
+  \]</p>
+
+  <h3>Observations of Data</h3>
+  <p>Population is finite. May not come from a known random process.</p>
+  <p><strong>Example:</strong> Population = \{1, 2, 3, 3̅, 7\} (size \( N = 5 \))</p>
+  <ul>
+    <li><strong>Sampling with replacement</strong>: sample = \{2, 3, 2\}</li>
+    <li><strong>Sampling without replacement</strong>: sample = \{7, 3, 3̅\}</li>
+  </ul>
+  <p>If \( N \gg n \), both methods yield similar results.</p>
+
+  <hr>
+
+  <h2>Section 1.4: Statistics vs Parameters</h2>
+  <ul>
+    <li><strong>Statistic</strong>: numerical characteristic of a sample</li>
+    <li><strong>Parameter</strong>: numerical characteristic of a population or a probability distribution</li>
+  </ul>
+
+  <p><strong>Examples:</strong></p>
+  <ul>
+    <li>\( X \sim \mathcal{N}(\mu, \sigma^2) \): \( \mu, \sigma \) are parameters</li>
+    <li>Sample mean: \( \bar{X} = \frac{1}{n} \sum_{i=1}^n X_i \): statistic (also a random variable)</li>
+    <li>Data mean: \( \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i \): statistic</li>
+    <li>Population = all babies born in US in 2004:
+      <ul>
+        <li>Mean of population = parameter \( \mu \)</li>
+        <li>Mean of sample of 200 babies = statistic \( \bar{x} \)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <hr>
+
+  <h2>Section 1.5: Surveys</h2>
+  <p><strong>Survey</strong>: Ask people what they think or how they live</p>
+  <p><strong>Sample survey</strong>: Use a sample from the population due to practicality</p>
+  <ul>
+    <li>Population → Sampling Frame → Random Sample</li>
+  </ul>
+
+  <p><strong>Example:</strong> General Social Survey (GSS)</p>
+  <ul>
+    <li>Surveys on sociological factors: gender, income, education, etc.</li>
+    <li>Archived online since 1970s, evolving questions</li>
+    <li>Uses multilevel stratified sampling (not covered in this course)</li>
+  </ul>
+
+  <hr>
+
+  <h2>Section 1.6: Observational vs Experimental Studies</h2>
+  <p><strong>Observational Study:</strong> Observe only, no intervention</p>
+  <p><strong>Example:</strong> Beer and hot wings consumption (Sec. 1.9)</p>
+
+  <p><strong>Experimental Study:</strong> Change conditions or give treatment</p>
+  <ul>
+    <li>Treatment group vs control group</li>
+    <li>Random assignment of subjects to groups</li>
+  </ul>
+
+  <p><strong>Example:</strong> Tree seedling growth under different fertilizer/competition (Sec. 1.10)</p>
+
+  <p><strong>Caution:</strong> Non-random samples → results not generalizable</p>
+  <p><strong>Example:</strong> Tai Chi arthritis study (Sec. 1.11)</p>
+  <ul>
+    <li>All volunteers → cannot generalize to broader population</li>
+  </ul>
 
   <hr>
 
