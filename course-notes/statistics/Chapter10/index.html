@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Chapter 10: Categorical Data</title>
+  <title>Chapter 10: Categorical Data and Chi-Square Test</title>
   <link rel="stylesheet" href="../../stylesheet.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -28,12 +28,27 @@
       border-top: 1px solid #ccc;
       margin: 40px 0;
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    table th {
+      background-color: #f2f2f2;
+    }
   </style>
 </head>
 <body>
+
 <div id="layout-content" style="max-width: 960px; margin: 30px auto; padding: 0 50px;">
 
-<h1>Chapter 10: Categorical Data</h1>
+<h1>Chapter 10: Categorical Data and Chi-Square Test</h1>
 
 <h2>Section 10.1: Independence in Contingency Tables</h2>
 <p>A survey asked 200 students (HS and College) whether they prefer Instagram or Snapchat:</p>
@@ -48,30 +63,14 @@
   </tbody>
 </table>
 <p><strong>Question:</strong> Are the differences in Instagram preference due to chance?</p>
-<p><strong>Hypotheses:</strong></p>
 <ul>
-  <li>\( H_0 \): Preference is independent of group</li>
-  <li>\( H_A \): Preference is not independent of group</li>
+  <li><strong>\( H_0 \)</strong>: Preference is independent of group</li>
+  <li><strong>\( H_A \)</strong>: Preference is not independent of group</li>
 </ul>
-<p>If \( H_0 \) is true, then all groups should have the same Instagram preference: 43%.</p>
-
-<h2>Expected Counts</h2>
-<p>Expected values assuming independence:</p>
-<table>
-  <thead>
-    <tr><th>Group</th><th>Insta</th><th>Snap</th><th>Total</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>HS</td><td>43</td><td>57</td><td>100</td></tr>
-    <tr><td>College</td><td>43</td><td>57</td><td>100</td></tr>
-    <tr><td>Total</td><td>86</td><td>114</td><td>200</td></tr>
-  </tbody>
-</table>
-<p>If \( H_0 \) is true, then observed counts should be close to expected.</p>
+<p>If \( H_0 \) is true, all groups should show 43% Instagram preference.</p>
 
 <h2>Section 10.2: Permutation Test of Independence</h2>
 <p>If group and preference are independent, then any permutation of preferences is equally likely.</p>
-<p><strong>Steps:</strong></p>
 <ol>
   <li>Randomly permute preference labels among individuals</li>
   <li>For each permutation, compute the chi-squared statistic \( C_i \)</li>
@@ -84,16 +83,11 @@
 <h2>Section 10.3: Chi-Square Test of Independence</h2>
 <p><strong>Chi-squared statistic:</strong></p>
 <p>\[ C = \sum \frac{(O - E)^2}{E} \]</p>
-<p>Example: for observed vs expected counts:</p>
+<p>Example calculation:</p>
 <p>
 \[ C = \frac{(34 - 43)^2}{43} + \frac{(66 - 57)^2}{57} + \frac{(52 - 43)^2}{43} + \frac{(48 - 57)^2}{57} = 6.6 \]</p>
-<p>Large \( C \Rightarrow \) large deviation between observed and expected → group matters.</p>
-
-<p><strong>Distribution under \( H_0 \):</strong> Chi-square with degrees of freedom:</p>
-<p>
-\[ df = (r - 1)(c - 1) = (2 - 1)(2 - 1) = 1 \]</p>
-<p><strong>p-value:</strong>
-\[ P(C \ge 6.6) = 0.01 \]</p>
+<p><strong>Degrees of Freedom:</strong> \( df = (r - 1)(c - 1) = (2 - 1)(2 - 1) = 1 \)</p>
+<p><strong>p-value:</strong> \( P(C \ge 6.6) = 0.01 \)</p>
 <p><strong>Conclusion:</strong> Reject \( H_0 \): group affects preference.</p>
 
 </div>
