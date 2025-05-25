@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Chapter 1: Data and Case Studies</title>
+  <title>Chapter 2: Summary Statistics</title>
   <link rel="stylesheet" href="../../stylesheet.css">
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -14,140 +14,116 @@
       margin-bottom: 40px;
       border-bottom: none;
     }
-
     h2 {
       color: #2471A3;
       font-size: 125%;
       margin-top: 2em;
     }
-
     p, ul, li {
       font-size: 16px;
       line-height: 1.6;
     }
-
     hr {
       border: none;
       border-top: 1px solid #ccc;
       margin: 40px 0;
     }
+    .svg-box {
+      margin: 20px 0;
+    }
   </style>
 </head>
-
 <body>
 <div id="layout-content" style="max-width: 960px; margin: 30px auto; padding: 0 50px;">
 
-  <h1>Chapter 1: Data and Case Studies</h1>
+<h1>Chapter 2: Summary Statistics</h1>
 
-  <h2>Section 1.1: Introduction to Data</h2>
-  <p>Statistics is driven by <strong>real applications</strong>:</p>
-  <ul>
-    <li>Collect data</li>
-    <li>Understand what it means</li>
-  </ul>
-  <p><strong>Example (Sec 1.1: Flight Delays)</strong>:</p>
-  <ul>
-    <li>Columns = variables</li>
-    <li>Rows = observations</li>
-  </ul>
+<h2>Section 2.1: Basic Statistics</h2>
+<p>Given data: \( \{8, 3, 14, 1, 5, 7, 21, 4, 10, 3\} \)</p>
+<p>Ordered: \( \{1, 3, 3, 4, 5, 7, 8, 10, 14, 21\} \)</p>
+<ul>
+  <li>\( n = 10 \)</li>
+  <li>\( \bar{x} = 7.6 \)</li>
+  <li>Median = 6</li>
+  <li>Min = 1, Max = 21</li>
+</ul>
 
-  <hr>
+<h2>Section 2.2: Standard Deviation</h2>
+<p>\( s = \sqrt{ \frac{1}{n-1} \sum (x_i - \bar{x})^2 } = 6.077 \)</p>
+<p>For population: \( s_{pop} = \sqrt{ \frac{1}{n} \sum (x_i - \bar{x})^2 } \)</p>
 
-  <h2>Section 1.2: Types of Data</h2>
-  <ul>
-    <li><strong>Population</strong>: Data for all individuals or observations (finite or infinite)</li>
-    <li><strong>Sample</strong>: Data from a subset of the population</li>
-    <li><strong>Random sample</strong>: Observations are chosen randomly</li>
-  </ul>
-  <p><strong>Statistical inference</strong>: Making conclusions about a population based on a sample.</p>
+<hr>
+<h2>Section 2.3: Quartiles and Box Plot</h2>
+<ul>
+  <li>Q1 = 3.25</li>
+  <li>Median = 6</li>
+  <li>Q3 = 9.5</li>
+  <li>Five-number summary = (1, 3.25, 6, 9.5, 21)</li>
+</ul>
+<p>\( IQR = Q3 - Q1 = 6.25 \)</p>
+<p>Upper fence: \( Q3 + 1.5 \cdot IQR = 18.875 \)</p>
+<p>Lower fence: \( Q1 - 1.5 \cdot IQR = -6.125 \)</p>
 
-  <p><strong>Notation</strong>:</p>
-  <ul>
-    <li>Capital letters \( X, Y, Z \): random variables</li>
-    <li>Lowercase letters \( x_1, x_2, \ldots \): observed values (data)</li>
-  </ul>
+<div class="svg-box">
+<h3>Box Plot</h3>
+<svg width="500" height="100">
+  <line x1="50" y1="50" x2="450" y2="50" stroke="#ccc" />
+  <line x1="80" y1="40" x2="80" y2="60" stroke="black" />
+  <line x1="320" y1="40" x2="320" y2="60" stroke="black" />
+  <rect x="120" y="35" width="160" height="30" fill="#AED6F1" stroke="black"/>
+  <line x1="200" y1="35" x2="200" y2="65" stroke="black" />
+  <text x="45" y="75">1</text>
+  <text x="75" y="75">Q1=3.25</text>
+  <text x="190" y="75">Med=6</text>
+  <text x="305" y="75">Q3=9.5</text>
+  <text x="445" y="75">21</text>
+</svg>
+</div>
 
-  <hr>
+<hr>
+<h2>Section 2.4: Histogram</h2>
+<ul>
+  <li>(0,5] → 5 values</li>
+  <li>(5,10] → 3 values</li>
+  <li>(10,15] → 1 value</li>
+  <li>(15,20] → 0</li>
+  <li>(20,25] → 1</li>
+</ul>
+<div class="svg-box">
+<h3>Histogram</h3>
+<svg width="300" height="160">
+  <line x1="30" y1="140" x2="270" y2="140" stroke="black" />
+  <line x1="30" y1="20" x2="30" y2="140" stroke="black" />
+  <rect x="40" y="60" width="20" height="80" fill="#85C1E9"/>
+  <text x="40" y="155">0-5</text>
+  <rect x="80" y="80" width="20" height="60" fill="#85C1E9"/>
+  <text x="80" y="155">5-10</text>
+  <rect x="120" y="120" width="20" height="20" fill="#85C1E9"/>
+  <text x="120" y="155">10-15</text>
+  <rect x="160" y="140" width="20" height="0" fill="#85C1E9"/>
+  <text x="160" y="155">15-20</text>
+  <rect x="200" y="120" width="20" height="20" fill="#85C1E9"/>
+  <text x="200" y="155">20-25</text>
+</svg>
+</div>
 
-  <h2>Section 1.3: Observations</h2>
-  <h3>Observations of a Random Process</h3>
-  <p>Population is infinite. Random sample means independent and identically distributed (i.i.d) observations.</p>
-  <p><strong>Example:</strong> Let \( X \in \{0, 1\} \) with equal probability → Bernoulli distribution:</p>
-  <p>\( X \sim \text{Bern}(p) \), where:</p>
-  <p>\[
-    X = \begin{cases}
-    1 & \text{with probability } p \\
-    0 & \text{with probability } 1 - p
-    \end{cases}
-  \]</p>
-
-  <h3>Observations of Data</h3>
-  <p>Population is finite. May not come from a known random process.</p>
-  <p><strong>Example:</strong> Population = \{1, 2, 3, 3̅, 7\} (size \( N = 5 \))</p>
-  <ul>
-    <li><strong>Sampling with replacement</strong>: sample = \{2, 3, 2\}</li>
-    <li><strong>Sampling without replacement</strong>: sample = \{7, 3, 3̅\}</li>
-  </ul>
-  <p>If \( N \gg n \), both methods yield similar results.</p>
-
-  <hr>
-
-  <h2>Section 1.4: Statistics vs Parameters</h2>
-  <ul>
-    <li><strong>Statistic</strong>: numerical characteristic of a sample</li>
-    <li><strong>Parameter</strong>: numerical characteristic of a population or a probability distribution</li>
-  </ul>
-
-  <p><strong>Examples:</strong></p>
-  <ul>
-    <li>\( X \sim \mathcal{N}(\mu, \sigma^2) \): \( \mu, \sigma \) are parameters</li>
-    <li>Sample mean: \( \bar{X} = \frac{1}{n} \sum_{i=1}^n X_i \): statistic (also a random variable)</li>
-    <li>Data mean: \( \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i \): statistic</li>
-    <li>Population = all babies born in US in 2004:
-      <ul>
-        <li>Mean of population = parameter \( \mu \)</li>
-        <li>Mean of sample of 200 babies = statistic \( \bar{x} \)</li>
-      </ul>
-    </li>
-  </ul>
-
-  <hr>
-
-  <h2>Section 1.5: Surveys</h2>
-  <p><strong>Survey</strong>: Ask people what they think or how they live</p>
-  <p><strong>Sample survey</strong>: Use a sample from the population due to practicality</p>
-  <ul>
-    <li>Population → Sampling Frame → Random Sample</li>
-  </ul>
-
-  <p><strong>Example:</strong> General Social Survey (GSS)</p>
-  <ul>
-    <li>Surveys on sociological factors: gender, income, education, etc.</li>
-    <li>Archived online since 1970s, evolving questions</li>
-    <li>Uses multilevel stratified sampling (not covered in this course)</li>
-  </ul>
-
-  <hr>
-
-  <h2>Section 1.6: Observational vs Experimental Studies</h2>
-  <p><strong>Observational Study:</strong> Observe only, no intervention</p>
-  <p><strong>Example:</strong> Beer and hot wings consumption (Sec. 1.9)</p>
-
-  <p><strong>Experimental Study:</strong> Change conditions or give treatment</p>
-  <ul>
-    <li>Treatment group vs control group</li>
-    <li>Random assignment of subjects to groups</li>
-  </ul>
-
-  <p><strong>Example:</strong> Tree seedling growth under different fertilizer/competition (Sec. 1.10)</p>
-
-  <p><strong>Caution:</strong> Non-random samples → results not generalizable</p>
-  <p><strong>Example:</strong> Tai Chi arthritis study (Sec. 1.11)</p>
-  <ul>
-    <li>All volunteers → cannot generalize to broader population</li>
-  </ul>
-
-  <hr>
+<hr>
+<h2>Section 2.5: Empirical Cumulative Distribution Function (ECDF)</h2>
+<p>Sorted data: \( \{0, 3, 3, 5, 7\} \)</p>
+<p>\( \hat{F}(x) = \frac{1}{5} \cdot \text{\# obs} \leq x \)</p>
+<div class="svg-box">
+<h3>ECDF Plot</h3>
+<svg width="300" height="150">
+  <line x1="30" y1="130" x2="270" y2="130" stroke="black" />
+  <line x1="30" y1="30" x2="30" y2="130" stroke="black" />
+  <polyline points="30,130 80,130 80,110 130,110 130,90 180,90 180,70 230,70 230,50" stroke="green" fill="none" stroke-width="2"/>
+  <circle cx="80" cy="130" r="3" fill="green"/>
+  <circle cx="130" cy="110" r="3" fill="green"/>
+  <circle cx="180" cy="90" r="3" fill="green"/>
+  <circle cx="230" cy="70" r="3" fill="green"/>
+  <circle cx="270" cy="50" r="3" fill="green"/>
+</svg>
+</div>
 
 </div>
 </body>
