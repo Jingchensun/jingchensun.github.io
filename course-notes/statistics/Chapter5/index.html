@@ -12,7 +12,6 @@
       color: #527bbd;
       font-size: 165%;
       margin-bottom: 40px;
-      border-bottom: none;
     }
 
     h2 {
@@ -41,7 +40,7 @@
 
   <h2>5.1 Introduction to Bootstrap</h2>
   <p>The bootstrap is a way to estimate the sampling distribution of a statistic using only the observed data, without assuming any specific probability distribution.</p>
-  <p>Given data \\( \\{1, 3\\} \\), we have \\( n = 2 \\), \\( \\bar{x} = 2 \\). Since we don't know the population distribution, we can't derive the sampling distribution of \\( \\bar{X} \\) analytically.</p>
+  <p>Given data \( \{1, 3\} \), we have \( n = 2 \), \( \bar{x} = 2 \). Since we don't know the population distribution, we can't derive the sampling distribution of \( \bar{X} \) analytically.</p>
 
   <h2>Theoretical Bootstrap</h2>
   <p>Consider all permutations of the data with replacement:</p>
@@ -49,33 +48,41 @@
     <li>Possible samples: (1,1), (1,3), (3,1), (3,3)</li>
     <li>Means: 1, 2, 2, 3</li>
   </ul>
-  <p>The bootstrap distribution \\( \\bar{X}^{(t)}_{\\text{boot}} \\) has:</p>
-  <p>\\( \\hat{\\mu}^{(t)}_{\\text{boot}} = 2 \\)</p>
-  <p>\\( \\hat{SE}^{(t)}_{\\text{boot}} = \\sqrt{\\frac{1}{4}((1{-}2)^2 + (2{-}2)^2 + (2{-}2)^2 + (3{-}2)^2)} = \\frac{1}{2\\sqrt{2}} \\)</p>
+  <p>The bootstrap distribution \( \bar{X}^{(t)}_{\text{boot}} \) has:</p>
+  <p>\( \hat{\mu}^{(t)}_{\text{boot}} = 2 \)</p>
+  <p>\( \hat{SE}^{(t)}_{\text{boot}} = \sqrt{\frac{1}{4}[(1{-}2)^2 + (2{-}2)^2 + (2{-}2)^2 + (3{-}2)^2]} = \frac{1}{2\sqrt{2}} \)</p>
+
+  <hr>
 
   <h2>5.2 Bootstrap Distribution</h2>
   <p>The bootstrap distribution approximates the true sampling distribution by resampling from the data:</p>
   <ul>
-    <li>Start with a single sample: \\( x_1, x_2, ..., x_n \\)</li>
-    <li>Draw \\( N \\) resamples of size \\( n \\) with replacement</li>
-    <li>Compute \\( \\bar{X}_{\\text{boot}} \\) for each resample</li>
+    <li>Start with a single sample: \( x_1, x_2, ..., x_n \)</li>
+    <li>Draw \( N \) resamples of size \( n \) with replacement</li>
+    <li>Compute \( \bar{X}_{\text{boot}} \) for each resample</li>
   </ul>
-  <p>For large \\( N \\), \\( \\bar{X}^{(t)}_{\\text{boot}} \\approx \\bar{X}_{\\text{boot}} \\)</p>
-  <p><strong>Note:</strong> The theoretical bootstrap using all \\( n^n \\) permutations is computationally infeasible for moderate \\( n \\). For example, if \\( n = 30 \\), then \\( n^n \\approx 2 \\times 10^{44} \\) samples, which would take longer than the age of the universe to compute exhaustively.</p>
+  <p>For large \( N \), \( \bar{X}^{(t)}_{\text{boot}} \approx \bar{X}_{\text{boot}} \)</p>
 
-  <h2>5.3 Confidence Intervals using Bootstrap</h2>
-  <p>Assume \\( X \\sim \\mathcal{N}(0,1) \\), and take a sample of size \\( n = 50 \\).</p>
+  <p><strong>Note:</strong> The theoretical bootstrap using all \( n^n \) permutations is computationally infeasible for moderate \( n \). For example, if \( n = 30 \), then \( n^n \approx 2 \times 10^{44} \) samples, which would take longer than the age of the universe to compute exhaustively.</p>
+
+  <hr>
+
+  <h2>5.3 Bootstrap Confidence Interval</h2>
+  <p>Example: Let \( X \sim \mathcal{N}(0, 1) \), and take a sample of size \( n = 50 \).</p>
   <ul>
-    <li>Compute sample mean \\( \\bar{x} \\), sample std. dev. \\( s \\)</li>
-    <li>Draw \\( N \\) bootstrap resamples of size \\( n \\)</li>
-    <li>Form the bootstrap distribution: \\( \\{ \\bar{X}^{(1)}, \\bar{X}^{(2)}, ..., \\bar{X}^{(N)} \\} \\)</li>
+    <li>From the sample, compute \( \bar{x} \) and sample standard deviation \( s \)</li>
+    <li>Generate \( N \) bootstrap resamples of size \( n \)</li>
+    <li>Construct the bootstrap distribution: \( \bar{X}^{(1)}, \bar{X}^{(2)}, ..., \bar{X}^{(N)} \)</li>
   </ul>
-  <p>Then estimate:</p>
-  <p>\\( \\hat{\\mu}_{\\text{boot}} = \\frac{1}{N} \\sum_{i=1}^N \\bar{X}^{(i)} \\)</p>
-  <p>\\( \\hat{SE}_{\\text{boot}} = \\sqrt{\\frac{1}{N - 1} \\sum_{i=1}^N \\left( \\bar{X}^{(i)} - \\hat{\\mu}_{\\text{boot}} \\right)^2} \\)</p>
 
-  <p>To form a 95% confidence interval for \\( \\mu \\), use the ECDF (empirical cumulative distribution function) of \\( \\bar{X}_{\\text{boot}} \\):</p>
-  <p>Find the 2.5th and 97.5th percentiles: \\[ \\bar{X}_{0.025} < \\mu < \\bar{X}_{0.975} \\]</p>
+  <p>Compute:</p>
+  <p>\( \hat{\mu}_{\text{boot}} = \frac{1}{N} \sum_{i=1}^{N} \bar{X}^{(i)} \)</p>
+  <p>\( \hat{SE}_{\text{boot}} = \sqrt{\frac{1}{N - 1} \sum_{i=1}^{N} (\bar{X}^{(i)} - \hat{\mu}_{\text{boot}})^2} \)</p>
+
+  <h3>Constructing the 95% Confidence Interval</h3>
+  <p>Use the empirical cumulative distribution function (ECDF) of \( \bar{X}_{\text{boot}} \):</p>
+  <p>Determine the 2.5th and 97.5th percentiles from the ECDF:</p>
+  <p>\( \bar{X}_{0.025} < \mu < \bar{X}_{0.975} \)</p>
 
   <p><em>See also demo: <a href="ch5_bootstrap_normal.html" target="_blank">ch5_bootstrap_normal.html</a></em></p>
 
