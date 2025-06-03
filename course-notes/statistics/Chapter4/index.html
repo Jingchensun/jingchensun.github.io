@@ -2,30 +2,99 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Statistical Inference Notes</title>
+  <title>Chapter 4: Sampling Distributions</title>
   <link rel="stylesheet" href="../../stylesheet.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    h1 {
+      text-align: center;
+      color: #527bbd;
+      font-size: 165%;
+      margin-bottom: 40px;
+      border-bottom: none;
+    }
+
+    h2 {
+      color: #2471A3;
+      font-size: 125%;
+      margin-top: 2em;
+    }
+
+    p, ul, li {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 40px 0;
+    }
+  </style>
 </head>
+
 <body>
+<div id="layout-content" style="max-width: 960px; margin: 30px auto; padding: 0 50px;">
 
-  <h1>Statistical Inference Notes</h1>
+  <h1>Chapter 4: Sampling Distributions</h1>
 
-  <h2>📘 Course Description</h2>
-  <p>This course provides a mathematical foundation for classical and modern statistical inference. Topics include point estimation, confidence intervals, hypothesis testing, likelihood theory, and bootstrap techniques.</p>
-
-  <h2>📚 Reference Book</h2>
-  <p><strong>Statistical Inference (2nd Edition)</strong> by George Casella and Roger L. Berger</p>
-
-  <h2>🧾 Chapters</h2>
+  <h2>Motivating Example: Coin Flipping</h2>
+  <p>Flip a coin \(n = 10\) times. Each flip is a Bernoulli trial:</p>
+  <p>
+    \[ X \sim \text{Bern}(p), \quad X = \begin{cases} 1 & \text{(head with prob } p) \\ 0 & \text{(tail with prob } 1 - p) \end{cases} \]
+  </p>
   <ul>
-    <li><a href="Chapter1/index.html">Chapter 1: Probability Review</a></li>
-    <li><a href="Chapter2/index.html">Chapter 2: Point Estimation</a></li>
-    <li><a href="Chapter3/index.html">Chapter 3: Confidence Intervals</a></li>
-    <li><a href="Chapter4/index.html">Chapter 4: Hypothesis Testing Basics</a></li>
-    <li><a href="Chapter5/index.html">Chapter 5: Likelihood Ratio Tests</a></li>
-    <li><a href="Chapter6/index.html">Chapter 6: Sufficiency & Completeness</a></li>
-    <li><a href="Chapter7/index.html">Chapter 7: Bayesian Inference</a></li>
-    <li><a href="Chapter8/chapter8.html">Chapter 8: Bootstrap and Resampling</a></li>
+    <li>\( \mathbb{E}[X] = p \)</li>
+    <li>\( \text{Var}[X] = p(1 - p) \)</li>
+  </ul>
+  <p>Let the sample be \(X_1, X_2, \ldots, X_{10}\), then:</p>
+  <p>
+    \[ T = X_1 + X_2 + \cdots + X_{10} \sim \text{Binom}(10, p) \]
+  </p>
+  <p>Standard error: \( SE[T] = \sqrt{\text{Var}[T]} = \sqrt{np(1 - p)} = 2.5 \)</p>
+
+  <hr>
+
+  <h2>Simulation for Approximate Sampling Distribution</h2>
+  <ol>
+    <li>Randomly draw 1 sample of size \(n\)</li>
+    <li>Compute number of heads \(T^{(1)}\)</li>
+    <li>Repeat \(N\) times to get \(\hat{T} = \{T^{(1)}, \ldots, T^{(N)}\}\)</li>
+    <li>Approximate PMF: \( \hat{p}(x) = \frac{\text{count}(\hat{T} = x)}{N} \)</li>
+  </ol>
+  <p><em>See R code <a href="ch4_sampling-dist-coin-flip.html" target="_blank">ch4_sampling-dist-coin-flip.html</a></em></p>
+
+  <hr>
+
+  <h2>Example: Exponential Distribution</h2>
+  <p>Let \(X \sim \text{Exp}(\lambda)\) with \(\lambda = 1/15\)</p>
+  <ul>
+    <li>\(\mathbb{E}[X] = \mu = 1/\lambda = 15\)</li>
+    <li>\(\text{Var}[X] = \sigma^2 = 1/\lambda^2 = 225\)</li>
+  </ul>
+  <p>For sample mean \(\bar{X}\) of size \(n = 100\):</p>
+  <ul>
+    <li>\( \mathbb{E}[\bar{X}] = \mu = 15 \)</li>
+    <li>\( \text{Var}[\bar{X}] = \sigma^2 / n = 2.25 \)</li>
+    <li>\( SE[\bar{X}] = \sqrt{\text{Var}[\bar{X}]} = 1.5 \)</li>
   </ul>
 
+  <p>Although \(\bar{X}\) follows a Gamma distribution, we use simulation to approximate its distribution and confirm theoretical properties.</p>
+  <p><em>See R code <a href="ch4_sampling-dist-exponential.html" target="_blank">ch4_sampling-dist-exponential.html</a></em></p>
+
+  <hr>
+
+  <h2>Central Limit Theorem (CLT)</h2>
+  <p>For large \(n\), the distribution of the sample mean \(\bar{X}\) is approximately normal:</p>
+  <p>
+    \[ \bar{X}_n \approx \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right) \]
+  </p>
+  <p>
+    \[ \lim_{n \to \infty} P\left(\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} \leq z\right) = \Phi(z) \]
+  </p>
+  <p>So for sufficiently large \(n\), we can use normal approximation for the sampling distribution of the sample mean.</p>
+
+</div>
 </body>
 </html>
