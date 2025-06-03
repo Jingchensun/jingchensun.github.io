@@ -50,8 +50,7 @@
   </ul>
   <p>Let the sample be \(X_1, X_2, \ldots, X_{10}\), then:</p>
   <p>
-    \[ T = X_1 + X_2 + \cdots + X_{10} \sim \text{Binom}(10, p) \]
-  </p>
+    \[ T = X_1 + X_2 + \cdots + X_{10} \sim \text{Binom}(10, p) \]</p>
   <p>Standard error: \( SE[T] = \sqrt{\text{Var}[T]} = \sqrt{np(1 - p)} = 2.5 \)</p>
 
   <hr>
@@ -68,32 +67,43 @@
   <hr>
 
   <h2>Example: Exponential Distribution</h2>
-  <p>Let \(X \sim \text{Exp}(\lambda)\) with \(\lambda = 1/15\)</p>
+  <p>Let \( X \sim \text{Exp}(\lambda) \) with \( \lambda = 1/15 \). We know:</p>
+  <p>
+    \[ f(x) = \begin{cases} \lambda e^{-\lambda x} & x \geq 0 \\ 0 & x < 0 \end{cases}, \quad \mu = \mathbb{E}[X] = 1/\lambda, \quad \sigma^2 = \text{Var}[X] = 1/\lambda^2 \]
+  </p>
+  <p>Let \( X = (X_1, X_2, \ldots, X_n) \) be a sample of size \(n = 100\). Define the test statistic:</p>
+  <p>
+    \[ T(X) = \frac{1}{n} \sum_{i=1}^n X_i = \bar{X} \]
+  </p>
+  <p>Assume the distribution of \(\bar{X}\) is unknown (actually it's Gamma). We can still compute:</p>
   <ul>
-    <li>\(\mathbb{E}[X] = \mu = 1/\lambda = 15\)</li>
-    <li>\(\text{Var}[X] = \sigma^2 = 1/\lambda^2 = 225\)</li>
+    <li>\( \mathbb{E}[\bar{X}] = \mu = 1/\lambda = 15 \)</li>
+    <li>\( \text{Var}[\bar{X}] = \sigma^2 / n = 1 / (n \lambda^2) = 2.25 \)</li>
+    <li>\( \text{SE}[T] = \sqrt{\text{Var}[T]} = 1.5 \)</li>
   </ul>
-  <p>For sample mean \(\bar{X}\) of size \(n = 100\):</p>
-  <ul>
-    <li>\( \mathbb{E}[\bar{X}] = \mu = 15 \)</li>
-    <li>\( \text{Var}[\bar{X}] = \sigma^2 / n = 2.25 \)</li>
-    <li>\( SE[\bar{X}] = \sqrt{\text{Var}[\bar{X}]} = 1.5 \)</li>
-  </ul>
+  <p><strong>→ For mean of a sample, the mean and variance of sampling distribution is known.</strong></p>
 
-  <p>Although \(\bar{X}\) follows a Gamma distribution, we use simulation to approximate its distribution and confirm theoretical properties.</p>
-  <p><em>See R code <a href="ch4_sampling-dist-exponential.html" target="_blank">ch4_sampling-dist-exponential.html</a></em></p>
+  <p>What about the pdf of \(\bar{X}\)? Find the approximate sampling distribution \(\hat{T}\) via simulation and show that:</p>
+  <ul>
+    <li>\( \mathbb{E}[\hat{T}] \approx \mathbb{E}[T] \)</li>
+    <li>\( \text{Var}[\hat{T}] \approx \text{Var}[T] \)</li>
+  </ul>
+  <p><em>See R code <code>ch4_sampling-dist-exponential.Rmd</code></em></p>
 
   <hr>
 
   <h2>Central Limit Theorem (CLT)</h2>
-  <p>For large \(n\), the distribution of the sample mean \(\bar{X}\) is approximately normal:</p>
+  <p>For large \(n\), \(\hat{p}(x)\) is approximated by a normal distribution:</p>
   <p>
-    \[ \bar{X}_n \approx \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right) \]
+    Let \( X_1, \dots, X_n \) be i.i.d. random variables with \( \mathbb{E}[X] = \mu \), \( \text{Var}[X] = \sigma^2 \). Let \( \bar{X}_n \) be the sample mean. Then:
   </p>
   <p>
-    \[ \lim_{n \to \infty} P\left(\frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} \leq z\right) = \Phi(z) \]
+    \[ \lim_{n \to \infty} P\left( \frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}} \leq z \right) = \Phi(z), \quad P(Z \leq z) \approx \Phi(z) \]
   </p>
-  <p>So for sufficiently large \(n\), we can use normal approximation for the sampling distribution of the sample mean.</p>
+  <p>So:
+    \[ \bar{X}_n \approx \mathcal{N}(\mu, \sigma^2 / n) \quad \text{for large } n \]
+  </p>
+  <p><strong>→ The distribution of the mean of a large sample can be approximated by a normal distribution.</strong></p>
 
 </div>
 </body>
