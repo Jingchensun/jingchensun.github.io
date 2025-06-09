@@ -47,7 +47,32 @@
   <p>
     \[ \bar{X} \pm 1.96 \cdot \frac{\sigma}{\sqrt{n}} \]
   </p>
-  <p>If \( \bar{X} \) is observed, we are 95% confident that \( \mu \) lies in the interval.</p>
+  <p>Explanation:</p>
+  <ul>
+    <li>If \( \bar{X} \) is a random variable, then 95% of samples would give \( \mu \) within the interval.</li>
+    <li>If \( \bar{X} \) is an observed value, we are 95% confident that \( \mu \) is within the interval.</li>
+  </ul>
+
+  <h4>Example</h4>
+  <p>Population: US girls’ weight \( X_p \sim N(\mu_p = 100, \sigma_p = 25) \)</p>
+  <p>Sample: Erie County, \( n = 100 \), \( \bar{X}_E = 95 \)</p>
+  <p>Assume \( \sigma_E = \sigma_p = 25 \), then:</p>
+  <p>
+    \[ \bar{X}_E \pm 1.96 \cdot \frac{25}{\sqrt{100}} = 95 \pm 4.9 \Rightarrow 90.1 < \mu_E < 99.9 \]
+  </p>
+
+  <h4>General Form</h4>
+  <p>For \( Z \sim N(0,1) \):</p>
+  <p>
+    \[ P(-z_{\alpha/2} < Z < z_{\alpha/2}) = 1 - \alpha \Rightarrow \bar{X} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \]
+  </p>
+
+  <h4>Application: Margin of Error</h4>
+  <p>We want ME &lt; 1:</p>
+  <p>
+    \[ \text{ME} = z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \Rightarrow (1.645)(25)/\sqrt{n} < 1 \Rightarrow n > 1692 \]
+  </p>
+  <p>Conclusion: Need sample size \( n > 1692 \) to keep margin of error &lt; 1 at 90% confidence.</p>
 
   <h3>7.1.2: CI for \( \mu \) with Unknown \( \sigma \)</h3>
   <p>When \( \sigma \) is unknown, use sample standard deviation \( S \):</p>
@@ -60,8 +85,7 @@
   </p>
   <p>A \( (1 - \alpha) \times 100\% \) confidence interval is:</p>
   <p>
-    \[ \bar{X} \pm t_{1 - \alpha/2}(n-1) \cdot \frac{S}{\sqrt{n}} \]
-  </p>
+    \[ \bar{X} \pm t_{1 - \alpha/2}(n-1) \cdot \frac{S}{\sqrt{n}} \]</p>
 
   <h3>7.1.3: CI for Difference in Means</h3>
   <p>Given two samples \( X_1, \dots, X_{n_1} \sim N(\mu_1, \sigma_1^2) \) and \( Y_1, \dots, Y_{n_2} \sim N(\mu_2, \sigma_2^2) \), we estimate:</p>
@@ -71,23 +95,29 @@
   </ul>
   <p>Then the t-statistic is:</p>
   <p>
-    \[ T = \frac{(\bar{X} - \bar{Y}) - (\mu_1 - \mu_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}} \]
-  </p>
+    \[ T = \frac{(\bar{X} - \bar{Y}) - (\mu_1 - \mu_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}} \]</p>
   <p>Using Welch’s approximation, degrees of freedom \( \nu \) is:</p>
   <p>
     \[
       \nu = \frac{\left( \frac{S_1^2}{n_1} + \frac{S_2^2}{n_2} \right)^2}{
       \frac{ \left( \frac{S_1^2}{n_1} \right)^2 }{n_1 - 1} +
       \frac{ \left( \frac{S_2^2}{n_2} \right)^2 }{n_2 - 1} }
-    \]
-  </p>
+    \]</p>
   <p>Thus, the \( 95\% \) CI for \( \mu_1 - \mu_2 \) is:</p>
   <p>
-    \[ (\bar{X} - \bar{Y}) \pm t_{0.975}(\nu) \cdot \sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}} \]
-  </p>
-  <a href="ch7_t-lookup.html" target="_blank">t-table lookup (ch7_t-lookup.html)</a> – Critical values of the Student's t-distribution.
-  <a href="ch7_t-distribution.html" target="_blank">Interactive t-distribution plot (ch7_t-distribution.html)</a> – Visualize the shape of the t-distribution and its relation to the normal distribution.
+    \[ (\bar{X} - \bar{Y}) \pm t_{0.975}(\nu) \cdot \sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}} \]</p>
 
+  <hr>
+
+  <h2>References</h2>
+  <ul>
+    <li>
+      <a href="ch7_t-lookup.html" target="_blank">t-table lookup (ch7_t-lookup.html)</a> – Critical values of the Student's t-distribution.
+    </li>
+    <li>
+      <a href="ch7_t-distribution.html" target="_blank">Interactive t-distribution plot (ch7_t-distribution.html)</a> – Visualize the shape of the t-distribution and its relation to the normal distribution.
+    </li>
+  </ul>
 
 </div>
 </body>
