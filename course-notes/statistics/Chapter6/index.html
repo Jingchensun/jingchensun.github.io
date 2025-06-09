@@ -169,6 +169,169 @@ optimize(logL, interval = c(0, 4), maximum = TRUE)
     \hat{\sigma}_{\text{MLE}} = \sqrt{ \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2 }
   \]</p>
 
+  <hr>
+
+  <h2>Section 6.2: Method of Moments (MOM)</h2>
+
+  <p>Let \( X \) be a random variable with PDF \( f(x; \theta) \), and observed sample \( x_1, x_2, \dots, x_n \).</p>
+
+  <p>The <strong>r-th moment</strong> of the distribution is:</p>
+  <p>\[
+  \mathbb{E}[X^r] = \int_{-\infty}^{\infty} x^r f(x; \theta) dx
+  \]</p>
+  <p>The corresponding <strong>sample moment</strong> is:</p>
+  <p>\[
+  \frac{1}{n} \sum_{i=1}^n x_i^r
+  \]</p>
+
+  <p><strong>Key idea:</strong> Match theoretical moments with sample moments to solve for parameters.</p>
+
+  <h3>Case 1: Single parameter \( \theta \)</h3>
+  <p>Match the first moment:</p>
+  <p>\[
+  \mathbb{E}[X] = \int x f(x; \theta) dx = \frac{1}{n} \sum_{i=1}^n x_i = \bar{x}
+  \Rightarrow \hat{\theta}_{\text{MOM}} = \text{solution to the above}
+  \]</p>
+
+  <h3>Example: Exponential Distribution</h3>
+  <p>\( f(x; \lambda) = \lambda e^{-\lambda x}, \quad x \ge 0, \lambda > 0 \)</p>
+  <p>Theoretical mean:</p>
+  <p>\[
+  \mathbb{E}[X] = \int_0^\infty x \lambda e^{-\lambda x} dx = \frac{1}{\lambda}
+  \]</p>
+  <p>Set equal to sample mean:</p>
+  <p>\[
+  \frac{1}{\lambda} = \bar{x} \Rightarrow \hat{\lambda}_{\text{MOM}} = \frac{1}{\bar{x}}
+  \]</p>
+
+  <h3>Case 2: Two parameters (e.g., Normal Distribution)</h3>
+  <p>\( X \sim N(\mu, \sigma^2) \), match moments for \( r = 1, 2 \):</p>
+
+  <ul>
+    <li>First moment: \(\mathbb{E}[X] = \mu \Rightarrow \hat{\mu}_{\text{MOM}} = \bar{x}\)</li>
+    <li>Second moment: \(\mathbb{E}[X^2] = \sigma^2 + \mu^2\)</li>
+  </ul>
+
+  <p>Sample second moment:</p>
+  <p>\[
+  \frac{1}{n} \sum_{i=1}^n x_i^2 = \mathbb{E}[X^2] \Rightarrow \hat{\sigma}_{\text{MOM}}^2 = \frac{1}{n} \sum x_i^2 - \bar{x}^2
+  \]</p>
+
+  <p>This is equivalent to the non-adjusted sample variance (denominator is \( n \), not \( n - 1 \)).</p>
+  <hr>
+
+  <h2>Section 6.3: Properties of Estimators</h2>
+
+  <p>Let \( \hat{\theta} \) be an estimator of parameter \( \theta \) from a sample.</p>
+  <p>The <strong>bias</strong> of \( \hat{\theta} \) is defined as:</p>
+  <p>\[
+  \text{Bias}[\hat{\theta}] = \mathbb{E}[\hat{\theta}] - \theta
+  \]</p>
+  <p>Ideally, we want the bias to be zero (i.e., the estimator is unbiased).</p>
+
+  <h3>Example: Estimating the Mean</h3>
+  <p>Suppose we use the sample mean to estimate \( \mu = \mathbb{E}[X] \).</p>
+  <p>Let \( \hat{\mu} = \bar{X} = \frac{1}{n} \sum_{i=1}^n X_i \). Then:</p>
+  <p>\[
+  \text{Bias}[\bar{X}] = \mathbb{E}[\bar{X}] - \mu
+  = \mathbb{E}\left[\frac{1}{n} \sum_{i=1}^n X_i\right] - \mu
+  = \frac{1}{n} \sum_{i=1}^n \mathbb{E}[X_i] - \mu = \mu - \mu = 0
+  \]</p>
+
+  <p><strong>Conclusion:</strong> The sample mean \( \bar{X} \) is an unbiased estimator of \( \mu \).</p>
+  <p>This applies whether \( \bar{X} \) is derived via MLE or Method of Moments.</p>
+
+  <p><em>See handout "Ch 6 bias" for more on variance and MSE of estimators.</em></p>
+
+  <hr>
+
+  <h2>Section 6.3: Properties of Estimators (Continued)</h2>
+
+  <h3>Unbiased Estimator of Variance</h3>
+  <p><strong>Theorem 6.3.2:</strong> Let \( X_1, \dots, X_n \) be independent random variables with variance \( \text{Var}(X_i) = \sigma^2 \). Then an unbiased estimator of \( \sigma^2 \) is:</p>
+  <p>\[
+  S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2
+  \]</p>
+  <p>This is the sample variance. The factor \( \frac{1}{n - 1} \) is used to make it unbiased.</p>
+
+  <h3>Why Divide by \( n-1 \)?</h3>
+  <p>If we instead use:</p>
+  <p>\[
+  \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \bar{X})^2
+  \]</p>
+  <p>Then the bias is:</p>
+  <p>\[
+  \text{Bias}[\hat{\sigma}^2] = \mathbb{E}[\hat{\sigma}^2] - \sigma^2 = -\frac{\sigma^2}{n} \ne 0
+  \]</p>
+
+  <p>We correct this by rescaling:</p>
+  <p>\[
+  S^2 = \frac{n}{n - 1} \hat{\sigma}^2 \Rightarrow \mathbb{E}[S^2] = \sigma^2
+  \]</p>
+
+  <h3>Asymptotic Bias</h3>
+  <p>An estimator is <strong>asymptotically unbiased</strong> if:</p>
+  <p>\[
+  \lim_{n \to \infty} \text{Bias}[\hat{\theta}] = 0
+  \]</p>
+  <p>For example:</p>
+  <p>\[
+  \lim_{n \to \infty} \text{Bias}[\hat{\sigma}^2] = 0
+  \Rightarrow \hat{\sigma}^2 \text{ is asymptotically unbiased}
+  \]</p>
+
+  <hr>
+
+  <h3>Efficiency of Estimators</h3>
+  <p><strong>Efficiency</strong> measures how "tight" the estimator is. Given two unbiased estimators \( \hat{\theta}_1, \hat{\theta}_2 \):</p>
+  <p>\[
+  \text{If } \text{Var}[\hat{\theta}_1] < \text{Var}[\hat{\theta}_2] \Rightarrow \hat{\theta}_1 \text{ is more efficient}
+  \]</p>
+
+  <p><strong>Example:</strong></p>
+  <ul>
+    <li>\( \hat{\mu}_1 = \frac{1}{3}(X_1 + X_2 + X_3) \Rightarrow \text{Var} = \frac{\sigma^2}{3} \)</li>
+    <li>\( \hat{\mu}_2 = \frac{1}{6}X_1 + \frac{1}{3}X_2 + \frac{1}{2}X_3 \Rightarrow \text{Var} = \frac{7}{18} \sigma^2 \)</li>
+  </ul>
+  <p>Conclusion: \( \hat{\mu}_1 \) is more efficient.</p>
+
+  <hr>
+
+  <h3>Mean Squared Error (MSE)</h3>
+  <p>The mean squared error is:</p>
+  <p>\[
+  \text{MSE}[\hat{\theta}] = \mathbb{E}[(\hat{\theta} - \theta)^2] = \text{Var}[\hat{\theta}] + (\text{Bias}[\hat{\theta}])^2
+  \]</p>
+
+  <p>MSE combines both variance and bias, and is a useful metric when estimators are biased.</p>
+
+  <p><strong>Example: \( X \sim \text{Binomial}(n, p) \)</strong></p>
+  <ul>
+    <li>Estimator 1: \( \hat{p}_1 = \frac{X}{n} \)</li>
+    <li>\( \text{Bias}[\hat{p}_1] = 0, \quad \text{MSE} = \frac{p(1 - p)}{n} \)</li>
+    <li>Estimator 2: \( \hat{p}_2 = \frac{X + 1}{n + 2} \)</li>
+    <li>\( \text{Bias}[\hat{p}_2] \ne 0, \quad \text{MSE} = \frac{np(1 - p)}{(n + 2)^2} + \left( \frac{1 - 2p}{n + 2} \right)^2 \)</li>
+  </ul>
+
+  <p>Depending on values of \( n \) and \( p \), either estimator may have lower MSE.</p>
+
+  <hr>
+
+  <h3>Consistency of Estimators</h3>
+  <p>An estimator \( \hat{\theta} \) is <strong>consistent</strong> if:</p>
+  <p>\[
+  \lim_{n \to \infty} P(|\hat{\theta} - \theta| < \varepsilon) = 1 \quad \text{for any } \varepsilon > 0
+  \]</p>
+
+  <p><strong>Example:</strong> Let \( X_1, ..., X_n \sim N(\mu, 1) \), then:</p>
+  <p>\[
+  \bar{X}_n = \frac{1}{n} \sum X_i \quad \Rightarrow \mathbb{E}[\bar{X}_n] = \mu, \quad \text{Var}[\bar{X}_n] = \frac{1}{n}
+  \]</p>
+  <p>Since variance goes to 0 as \( n \to \infty \), \( \bar{X}_n \) is a consistent estimator of \( \mu \).</p>
+
+  <p><strong>Alternative criterion:</strong></p>
+  <p>If \( \text{MSE}[\hat{\theta}_n] \to 0 \) as \( n \to \infty \), then \( \hat{\theta}_n \) is consistent.</p>
+
 </div>
 </body>
 </html>
