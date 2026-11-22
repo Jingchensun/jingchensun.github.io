@@ -1023,3 +1023,10 @@ a:focus {
 .scaling-row {
   margin-top: 2.5rem;
 }
+
+/* Keep the title on two lines on desktop (the line break is hidden below 1024px) */
+@media screen and (min-width: 1024px) {
+  .publication-title {
+    font-size: 2.1rem !important;
+  }
+}
